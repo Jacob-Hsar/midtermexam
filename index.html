@@ -1,0 +1,2559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>House of J&S — Mid Term Exam</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Noto+Sans+Myanmar:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════
+   DESIGN SYSTEM
+   ═══════════════════════════════════════════ */
+:root{
+  /* gold palette */
+  --gold-50:#FDFAF0;
+  --gold-100:#FAF3DC;
+  --gold-200:#F2E5B4;
+  --gold-300:#E6D183;
+  --gold-400:#D4AF37;
+  --gold-500:#B8962E;
+  --gold-600:#8F731F;
+  --gold-700:#6B5616;
+
+  /* neutral */
+  --bg:#F6F7FA;
+  --surface:#FFFFFF;
+  --surface-2:#FBFCFD;
+  --line:#E8EBF0;
+  --line-2:#F0F2F6;
+
+  --ink-1:#0F1829;
+  --ink-2:#384457;
+  --ink-3:#6B7789;
+  --ink-4:#9AA4B2;
+
+  /* accents */
+  --success:#1E9E62;
+  --success-bg:#EAF7F0;
+  --danger:#D64545;
+  --danger-bg:#FBEEEE;
+  --info:#3B6FD4;
+
+  /* shadows */
+  --sh-1:0 1px 2px rgba(15,24,41,.04), 0 1px 3px rgba(15,24,41,.03);
+  --sh-2:0 4px 12px rgba(15,24,41,.05), 0 2px 4px rgba(15,24,41,.03);
+  --sh-3:0 12px 32px rgba(15,24,41,.08), 0 4px 8px rgba(15,24,41,.04);
+  --sh-4:0 24px 56px rgba(15,24,41,.10), 0 8px 16px rgba(15,24,41,.05);
+  --sh-gold:0 12px 32px rgba(212,175,55,.22), 0 4px 12px rgba(212,175,55,.14);
+
+  /* radii */
+  --r-xs:8px;
+  --r-sm:12px;
+  --r-md:16px;
+  --r-lg:22px;
+  --r-xl:28px;
+
+  /* type */
+  --ff:'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --ff-display:'Fraunces', 'Plus Jakarta Sans', serif;
+  --ff-mm:'Noto Sans Myanmar', 'Plus Jakarta Sans', sans-serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth; -webkit-text-size-adjust:100%}
+
+body{
+  font-family:var(--ff);
+  font-size:15px;
+  color:var(--ink-1);
+  background:var(--bg);
+  line-height:1.6;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+  -webkit-user-select:none; user-select:none;
+}
+
+/* ambient background */
+body::before{
+  content:'';
+  position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(900px 500px at 12% -8%, rgba(212,175,55,.10), transparent 55%),
+    radial-gradient(700px 400px at 100% 0%, rgba(59,111,212,.06), transparent 55%),
+    radial-gradient(700px 500px at 50% 100%, rgba(30,158,98,.04), transparent 60%);
+}
+
+h1,h2,h3,h4,h5{
+  font-weight:700;
+  letter-spacing:-.02em;
+  line-height:1.25;
+  color:var(--ink-1);
+}
+
+.mm,[lang="my"]{font-family:var(--ff-mm);line-height:1.95}
+
+/* ═══════════════════════════════════════════
+   HEADER
+   ═══════════════════════════════════════════ */
+.topbar{
+  position:sticky; top:0; z-index:200;
+  background:rgba(255,255,255,.82);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid var(--line);
+}
+.topbar-inner{
+  max-width:1180px; margin:0 auto;
+  padding:14px 28px;
+  display:flex; align-items:center; gap:20px;
+}
+.brand{display:flex; align-items:center; gap:13px; min-width:0}
+.brand-mark{
+  width:44px; height:44px; flex:none; border-radius:13px;
+  background:linear-gradient(140deg, var(--gold-400), var(--gold-600));
+  display:grid; place-items:center;
+  box-shadow:var(--sh-gold);
+  overflow:hidden;
+  position:relative;
+}
+.brand-mark::after{
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(140deg, rgba(255,255,255,.35), transparent 45%);
+}
+.brand-mark img{width:100%; height:100%; object-fit:contain; position:relative; z-index:1}
+.brand-mark span{
+  font-family:var(--ff-display); font-weight:700; font-size:16px;
+  color:#fff; letter-spacing:-.02em; position:relative; z-index:1;
+}
+.brand-text{min-width:0}
+.brand-text h1{
+  font-size:14.5px; font-weight:700; color:var(--ink-1);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  letter-spacing:-.01em;
+}
+.brand-text small{
+  display:block; font-size:10.5px; color:var(--ink-4);
+  font-weight:600; letter-spacing:.8px; text-transform:uppercase;
+  margin-top:1px;
+}
+.topbar-right{margin-left:auto; display:flex; align-items:center; gap:10px}
+.student-chip{
+  display:flex; align-items:center; gap:9px;
+  padding:8px 16px; border-radius:100px;
+  background:linear-gradient(135deg, var(--gold-50), var(--gold-100));
+  border:1px solid rgba(212,175,55,.35);
+  color:var(--gold-700);
+  font-size:12.5px; font-weight:700; letter-spacing:.1px;
+  white-space:nowrap;
+}
+.student-chip .pulse{
+  width:7px; height:7px; border-radius:50%; background:var(--success);
+  box-shadow:0 0 0 3px rgba(30,158,98,.16);
+  animation:blip 2.4s infinite;
+}
+@keyframes blip{
+  0%,100%{ box-shadow:0 0 0 3px rgba(30,158,98,.16); }
+  50%{ box-shadow:0 0 0 6px rgba(30,158,98,.05); }
+}
+
+/* ═══════════════════════════════════════════
+   TAB BAR
+   ═══════════════════════════════════════════ */
+.tabbar-wrap{
+  position:sticky; top:73px; z-index:190;
+  background:rgba(246,247,250,.85);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+  padding:12px 28px;
+}
+.tabbar{
+  max-width:1180px; margin:0 auto;
+  display:inline-flex; gap:4px;
+  padding:5px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:100px;
+  box-shadow:var(--sh-2);
+}
+.tab{
+  display:inline-flex; align-items:center; gap:9px;
+  padding:11px 26px;
+  border:0; background:transparent; cursor:pointer;
+  font-family:var(--ff); font-size:13.5px; font-weight:700;
+  color:var(--ink-3); border-radius:100px;
+  transition:all .3s cubic-bezier(.2,.8,.2,1);
+  white-space:nowrap;
+  position:relative;
+}
+.tab:hover{ color:var(--gold-600); }
+.tab.active{
+  background:linear-gradient(135deg, var(--gold-400), var(--gold-600));
+  color:#fff;
+  box-shadow:0 6px 18px rgba(212,175,55,.32), inset 0 1px 0 rgba(255,255,255,.25);
+}
+.tab svg{width:16px; height:16px; flex:none}
+.tab .count{
+  display:none;
+  padding:1px 7px; border-radius:100px;
+  background:rgba(255,255,255,.25);
+  font-size:10.5px; font-weight:800;
+}
+.tab.active .count{display:inline-block}
+
+/* ═══════════════════════════════════════════
+   LAYOUT
+   ═══════════════════════════════════════════ */
+.page{max-width:1180px; margin:0 auto; padding:32px 28px 100px}
+.view{display:none}
+.view.active{display:block; animation:reveal .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes reveal{
+  from{opacity:0; transform:translateY(10px)}
+  to{opacity:1; transform:translateY(0)}
+}
+
+/* ═══════════════════════════════════════════
+   STUDY NOTES
+   ═══════════════════════════════════════════ */
+.notes-hero{
+  position:relative;
+  background:linear-gradient(150deg, #FFFFFF 0%, #FFFDF5 60%, var(--gold-50) 100%);
+  border:1px solid var(--line);
+  border-radius:var(--r-xl);
+  padding:44px 48px;
+  box-shadow:var(--sh-3);
+  margin-bottom:32px;
+  overflow:hidden;
+}
+.notes-hero::before{
+  content:'';
+  position:absolute; top:-60px; right:-60px;
+  width:280px; height:280px; border-radius:50%;
+  background:radial-gradient(circle, rgba(212,175,55,.16), transparent 70%);
+  pointer-events:none;
+}
+.notes-hero::after{
+  content:'';
+  position:absolute; left:0; top:0; bottom:0; width:5px;
+  background:linear-gradient(180deg, var(--gold-400), var(--gold-600));
+}
+.hero-tag{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:5px 14px; border-radius:100px;
+  background:var(--surface); border:1px solid var(--gold-200);
+  color:var(--gold-700);
+  font-size:11px; font-weight:800; letter-spacing:.9px; text-transform:uppercase;
+  margin-bottom:18px;
+  box-shadow:var(--sh-1);
+}
+.hero-tag span{
+  width:6px; height:6px; border-radius:50%; background:var(--gold-400);
+}
+.notes-hero h2{
+  font-family:var(--ff-display);
+  font-size:clamp(26px, 3.4vw, 34px);
+  font-weight:700; letter-spacing:-.03em;
+  margin-bottom:10px;
+}
+.notes-hero h2 em{
+  font-style:normal;
+  background:linear-gradient(120deg, var(--gold-500), var(--gold-700));
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.notes-hero p{
+  color:var(--ink-3); font-size:15px; max-width:620px;
+  line-height:1.65;
+}
+.hero-stats{
+  display:flex; flex-wrap:wrap; gap:22px;
+  margin-top:26px; padding-top:24px;
+  border-top:1px dashed var(--line);
+}
+.hero-stat{display:flex; align-items:center; gap:12px}
+.hero-stat .icon{
+  width:38px; height:38px; flex:none; border-radius:11px;
+  background:var(--gold-50); border:1px solid var(--gold-200);
+  display:grid; place-items:center;
+  color:var(--gold-600); font-size:17px;
+}
+.hero-stat .num{
+  font-family:var(--ff-display); font-size:20px; font-weight:700;
+  color:var(--ink-1); line-height:1;
+}
+.hero-stat .lbl{
+  font-size:11px; color:var(--ink-4); font-weight:700;
+  text-transform:uppercase; letter-spacing:.7px; margin-top:3px;
+}
+
+/* unit blocks */
+.unit{margin-bottom:34px}
+.unit-header{
+  display:flex; align-items:center; gap:14px;
+  margin:0 0 18px;
+}
+.unit-chip{
+  display:inline-flex; align-items:center; gap:7px;
+  padding:6px 14px; border-radius:100px;
+  background:var(--ink-1); color:#fff;
+  font-size:10.5px; font-weight:800; letter-spacing:.9px; text-transform:uppercase;
+  box-shadow:var(--sh-2);
+}
+.unit-chip .dot{
+  width:5px; height:5px; border-radius:50%; background:var(--gold-400);
+}
+.unit-header h3{
+  font-family:var(--ff-display);
+  font-size:20px; font-weight:600; letter-spacing:-.02em;
+  color:var(--ink-1);
+}
+.unit-header .line{
+  flex:1; height:1px;
+  background:linear-gradient(90deg, var(--line), transparent);
+}
+
+/* lesson cards */
+.lesson{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--r-lg);
+  margin-bottom:14px;
+  box-shadow:var(--sh-1);
+  transition:all .3s cubic-bezier(.2,.8,.2,1);
+  overflow:hidden;
+}
+.lesson:hover{
+  border-color:rgba(212,175,55,.4);
+  box-shadow:var(--sh-3);
+  transform:translateY(-1px);
+}
+.lesson summary{
+  list-style:none;
+  padding:22px 26px;
+  display:flex; align-items:center; gap:14px;
+  cursor:pointer;
+  position:relative;
+  transition:background .25s ease;
+}
+.lesson summary::-webkit-details-marker{display:none}
+.lesson summary:hover{background:var(--gold-50)}
+.lesson .l-num{
+  width:34px; height:34px; flex:none; border-radius:10px;
+  background:linear-gradient(140deg, var(--gold-100), var(--gold-50));
+  border:1px solid var(--gold-200);
+  color:var(--gold-700);
+  display:grid; place-items:center;
+  font-family:var(--ff-display); font-size:14px; font-weight:700;
+}
+.lesson .l-title{
+  flex:1; font-size:15px; font-weight:700; color:var(--ink-1);
+  letter-spacing:-.01em;
+}
+.lesson .l-title small{
+  display:block; font-size:11.5px; font-weight:600;
+  color:var(--ink-4); letter-spacing:.2px; margin-top:2px;
+  text-transform:uppercase;
+}
+.lesson .chev{
+  width:26px; height:26px; flex:none; border-radius:8px;
+  background:var(--surface-2); border:1px solid var(--line);
+  display:grid; place-items:center;
+  color:var(--ink-3); font-size:11px;
+  transition:all .3s cubic-bezier(.2,.8,.2,1);
+}
+.lesson[open] .chev{
+  background:var(--gold-400); border-color:var(--gold-500); color:#fff;
+  transform:rotate(180deg);
+}
+.lesson[open] summary{background:var(--gold-50)}
+.lesson[open]{
+  border-color:rgba(212,175,55,.5);
+  box-shadow:var(--sh-3);
+}
+
+.lesson-body{
+  padding:6px 26px 26px;
+  border-top:1px solid var(--line-2);
+  animation:reveal .35s cubic-bezier(.2,.8,.2,1);
+}
+.lesson-body p{
+  font-size:14.5px; color:var(--ink-2); line-height:1.75;
+  margin-bottom:10px;
+}
+.lesson-body p:last-child{margin-bottom:0}
+.lesson-body strong{color:var(--ink-1); font-weight:700}
+
+.kv-list{
+  display:grid; grid-template-columns:auto 1fr;
+  gap:8px 16px; margin:12px 0;
+  font-size:14px;
+}
+.kv-list dt{
+  font-weight:700; color:var(--ink-1);
+  padding:3px 0;
+}
+.kv-list dd{color:var(--ink-2); padding:3px 0}
+
+.tag-row{display:flex; flex-wrap:wrap; gap:7px; margin:12px 0}
+.tag{
+  display:inline-flex; align-items:center;
+  padding:5px 12px; border-radius:8px;
+  background:var(--surface-2); border:1px solid var(--line);
+  color:var(--ink-2); font-size:12.5px; font-weight:600;
+  font-family:ui-monospace, 'SF Mono', Menlo, monospace;
+}
+.tag b{color:var(--gold-700); font-weight:700}
+
+code{
+  font-family:ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size:12.5px; font-weight:700;
+  padding:2px 7px; border-radius:6px;
+  background:var(--gold-50); border:1px solid var(--gold-200);
+  color:var(--gold-700);
+  white-space:nowrap;
+}
+
+.mm-note{
+  font-family:var(--ff-mm);
+  font-size:13.5px; line-height:2;
+  color:#5F4B15;
+  background:linear-gradient(100deg, var(--gold-50), #FFFEFB 75%);
+  border-left:3px solid var(--gold-400);
+  border-radius:0 var(--r-sm) var(--r-sm) 0;
+  padding:15px 20px;
+  margin-top:16px;
+}
+.mm-note b{color:var(--gold-700); font-weight:600}
+
+.pros-cons{
+  display:grid; grid-template-columns:1fr 1fr; gap:12px;
+  margin-top:12px;
+}
+.pc{
+  padding:14px 16px; border-radius:var(--r-sm);
+  border:1px solid var(--line); background:var(--surface-2);
+}
+.pc h5{
+  font-size:11px; font-weight:800; letter-spacing:.8px;
+  text-transform:uppercase; margin-bottom:8px;
+}
+.pc.pros h5{color:var(--success)}
+.pc.cons h5{color:var(--danger)}
+.pc ul{margin:0; padding-left:18px}
+.pc li{font-size:13.5px; color:var(--ink-2); margin-bottom:4px; line-height:1.55}
+.pc li:last-child{margin-bottom:0}
+
+/* ═══════════════════════════════════════════
+   EXAM START
+   ═══════════════════════════════════════════ */
+.start-card{
+  max-width:760px; margin:24px auto;
+  background:linear-gradient(160deg, #FFFFFF 0%, #FFFDF6 100%);
+  border:1px solid var(--line);
+  border-radius:var(--r-xl);
+  padding:56px 52px;
+  text-align:center;
+  box-shadow:var(--sh-4);
+  position:relative;
+  overflow:hidden;
+}
+.start-card::before{
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:5px;
+  background:linear-gradient(90deg, var(--gold-300), var(--gold-400), var(--gold-600), var(--gold-400), var(--gold-300));
+  background-size:200% 100%;
+  animation:shimmer 6s linear infinite;
+}
+@keyframes shimmer{
+  from{background-position:200% 0}
+  to{background-position:-200% 0}
+}
+.crest{
+  width:84px; height:84px; margin:0 auto 22px;
+  border-radius:26px;
+  background:linear-gradient(140deg, var(--gold-300), var(--gold-600));
+  display:grid; place-items:center;
+  box-shadow:var(--sh-gold);
+  position:relative;
+}
+.crest::after{
+  content:''; position:absolute; inset:0; border-radius:26px;
+  background:linear-gradient(140deg, rgba(255,255,255,.4), transparent 50%);
+}
+.crest svg{width:40px; height:40px; position:relative; z-index:1; color:#fff}
+
+.start-card h2{
+  font-family:var(--ff-display);
+  font-size:clamp(26px, 3.6vw, 34px);
+  font-weight:700; letter-spacing:-.03em;
+  margin-bottom:10px;
+}
+.start-card > p{
+  color:var(--ink-3); font-size:15px; margin-bottom:30px;
+  max-width:480px; margin-left:auto; margin-right:auto;
+}
+
+.fact-grid{
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:14px;
+  margin-bottom:32px;
+}
+.fact-box{
+  background:var(--surface); border:1px solid var(--line);
+  border-radius:var(--r-md); padding:20px 14px;
+  box-shadow:var(--sh-1);
+  transition:all .3s cubic-bezier(.2,.8,.2,1);
+}
+.fact-box:hover{
+  border-color:var(--gold-300);
+  transform:translateY(-2px);
+  box-shadow:var(--sh-3);
+}
+.fact-box .n{
+  font-family:var(--ff-display); font-size:28px; font-weight:700;
+  background:linear-gradient(135deg, var(--gold-500), var(--gold-700));
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent;
+  line-height:1;
+}
+.fact-box .l{
+  font-size:10.5px; color:var(--ink-4); font-weight:800;
+  letter-spacing:.9px; text-transform:uppercase; margin-top:8px;
+}
+
+.rules-box{
+  text-align:left;
+  background:var(--surface-2); border:1px solid var(--line);
+  border-radius:var(--r-md); padding:22px 26px;
+  margin-bottom:34px;
+}
+.rules-box h4{
+  font-size:11px; font-weight:800; letter-spacing:.9px;
+  text-transform:uppercase; color:var(--ink-3);
+  margin-bottom:14px;
+  display:flex; align-items:center; gap:8px;
+}
+.rules-box h4 svg{width:14px; height:14px; color:var(--gold-500)}
+.rules-box ul{list-style:none; padding:0}
+.rules-box li{
+  position:relative; padding-left:26px;
+  font-size:13.5px; color:var(--ink-2); line-height:1.7;
+  margin-bottom:9px;
+}
+.rules-box li:last-child{margin-bottom:0}
+.rules-box li::before{
+  content:''; position:absolute; left:0; top:8px;
+  width:14px; height:14px; border-radius:50%;
+  background:var(--gold-100); border:1.5px solid var(--gold-400);
+}
+.rules-box li::after{
+  content:''; position:absolute; left:4px; top:11.5px;
+  width:6px; height:3px; border-left:1.5px solid var(--gold-600);
+  border-bottom:1.5px solid var(--gold-600);
+  transform:rotate(-45deg);
+}
+
+/* ═══════════════════════════════════════════
+   BUTTONS
+   ═══════════════════════════════════════════ */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  border:0; cursor:pointer;
+  font-family:var(--ff); font-weight:700;
+  border-radius:100px;
+  transition:all .28s cubic-bezier(.2,.8,.2,1);
+  white-space:nowrap;
+}
+.btn svg{width:18px; height:18px; flex:none}
+.btn-primary{
+  padding:15px 40px;
+  font-size:15px;
+  color:#fff;
+  background:linear-gradient(135deg, var(--gold-400) 0%, var(--gold-600) 100%);
+  box-shadow:0 10px 26px rgba(212,175,55,.32), inset 0 1px 0 rgba(255,255,255,.22);
+}
+.btn-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 16px 36px rgba(212,175,55,.42), inset 0 1px 0 rgba(255,255,255,.28);
+}
+.btn-primary:active{transform:translateY(0)}
+.btn-primary:disabled{
+  opacity:.55; cursor:not-allowed; transform:none; box-shadow:none;
+}
+.btn-lg{padding:18px 54px; font-size:16px}
+
+.btn-ghost{
+  padding:10px 20px;
+  font-size:13px; font-weight:700;
+  color:var(--ink-2);
+  background:var(--surface);
+  border:1.5px solid var(--line);
+}
+.btn-ghost:hover{
+  border-color:var(--gold-400);
+  color:var(--gold-700);
+  background:var(--gold-50);
+}
+.btn-ghost svg{width:15px; height:15px}
+
+/* ═══════════════════════════════════════════
+   EXAM LAYOUT
+   ═══════════════════════════════════════════ */
+#examBody{display:none}
+
+.exam-bar{
+  position:sticky; top:130px; z-index:150;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);
+  border-radius:var(--r-lg);
+  padding:18px 24px;
+  box-shadow:var(--sh-3);
+  margin-bottom:28px;
+}
+.exam-bar-row{
+  display:flex; align-items:center; gap:22px;
+  flex-wrap:wrap;
+}
+.exam-bar-left{min-width:0; flex:none}
+.exam-bar-left h3{
+  font-size:14.5px; font-weight:800; letter-spacing:-.01em;
+}
+.exam-bar-left p{
+  font-size:11.5px; color:var(--ink-4); font-weight:600;
+  letter-spacing:.2px; margin-top:2px;
+}
+.progress-group{flex:1; min-width:200px}
+.progress-head{
+  display:flex; justify-content:space-between;
+  font-size:11.5px; font-weight:700; color:var(--ink-3);
+  margin-bottom:6px; letter-spacing:.2px;
+}
+.progress-head b{color:var(--ink-1); font-weight:800}
+.progress-track{
+  height:7px; border-radius:100px;
+  background:var(--line-2);
+  overflow:hidden;
+  position:relative;
+}
+.progress-fill{
+  height:100%; width:0%;
+  border-radius:100px;
+  background:linear-gradient(90deg, var(--gold-300), var(--gold-500));
+  transition:width .5s cubic-bezier(.2,.8,.2,1);
+  position:relative;
+}
+.progress-fill::after{
+  content:'';
+  position:absolute; inset:0;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+  animation:sweep 2.2s infinite;
+}
+@keyframes sweep{
+  from{transform:translateX(-100%)}
+  to{transform:translateX(100%)}
+}
+
+/* section */
+.sec{display:flex; align-items:center; gap:14px; margin:44px 0 18px}
+.sec:first-of-type{margin-top:8px}
+.sec-num{
+  width:38px; height:38px; flex:none; border-radius:12px;
+  background:linear-gradient(140deg, var(--gold-400), var(--gold-600));
+  color:#fff;
+  display:grid; place-items:center;
+  font-family:var(--ff-display); font-size:15px; font-weight:700;
+  box-shadow:var(--sh-gold);
+}
+.sec-title{
+  font-family:var(--ff-display);
+  font-size:18px; font-weight:600; letter-spacing:-.02em;
+}
+.sec-marks{
+  margin-left:auto;
+  padding:5px 14px; border-radius:100px;
+  background:var(--gold-50); border:1px solid var(--gold-200);
+  color:var(--gold-700);
+  font-size:10.5px; font-weight:800; letter-spacing:.8px; text-transform:uppercase;
+}
+
+/* question card */
+.q{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--r-lg);
+  padding:22px 26px;
+  margin-bottom:12px;
+  box-shadow:var(--sh-1);
+  transition:all .3s cubic-bezier(.2,.8,.2,1);
+  position:relative;
+  overflow:hidden;
+}
+.q::before{
+  content:'';
+  position:absolute; left:0; top:0; bottom:0;
+  width:3px; background:var(--gold-400);
+  transform:scaleY(0); transform-origin:top;
+  transition:transform .3s cubic-bezier(.2,.8,.2,1);
+}
+.q:hover{border-color:var(--line); box-shadow:var(--sh-2)}
+.q.answered::before{transform:scaleY(1)}
+.q.answered{border-color:rgba(30,158,98,.35)}
+.q.answered::before{background:var(--success)}
+.q.correct::before{background:var(--success); transform:scaleY(1)}
+.q.wrong::before{background:var(--danger); transform:scaleY(1)}
+.q.correct{background:linear-gradient(90deg, rgba(30,158,98,.05), transparent 40%)}
+.q.wrong{background:linear-gradient(90deg, rgba(214,69,69,.05), transparent 40%)}
+
+.q-head{
+  display:flex; gap:14px; align-items:flex-start;
+  margin-bottom:16px;
+}
+.q-num{
+  flex:none; min-width:30px; height:30px; padding:0 8px;
+  border-radius:9px;
+  background:var(--surface-2); border:1px solid var(--line);
+  color:var(--ink-2);
+  display:grid; place-items:center;
+  font-family:var(--ff-display); font-size:13px; font-weight:700;
+  transition:all .25s ease;
+}
+.q.answered .q-num{
+  background:var(--success); border-color:var(--success); color:#fff;
+}
+.q.correct .q-num{background:var(--success); border-color:var(--success); color:#fff}
+.q.wrong .q-num{background:var(--danger); border-color:var(--danger); color:#fff}
+
+.q-text{
+  flex:1; font-size:14.5px; font-weight:600;
+  color:var(--ink-1); line-height:1.55;
+}
+.q-marks{
+  font-size:11px; font-weight:700; color:var(--ink-4);
+  font-style:italic; margin-left:6px;
+}
+
+/* MCQ */
+.opts{display:grid; gap:8px}
+.opt{
+  display:flex; align-items:center; gap:13px;
+  padding:13px 16px;
+  border-radius:var(--r-sm);
+  background:var(--surface-2);
+  border:1.5px solid transparent;
+  cursor:pointer;
+  font-size:14px; font-weight:500;
+  color:var(--ink-2);
+  transition:all .2s cubic-bezier(.2,.8,.2,1);
+  position:relative;
+}
+.opt:hover{
+  background:var(--gold-50);
+  border-color:var(--gold-200);
+  color:var(--ink-1);
+}
+.opt input{
+  appearance:none; -webkit-appearance:none;
+  width:19px; height:19px; flex:none; border-radius:50%;
+  border:2px solid #C9CFD9; background:#fff;
+  cursor:pointer; position:relative;
+  transition:all .2s cubic-bezier(.2,.8,.2,1);
+}
+.opt input:checked{
+  border-color:var(--gold-500); background:var(--gold-500);
+  box-shadow:0 0 0 4px rgba(212,175,55,.15);
+}
+.opt input:checked::after{
+  content:''; position:absolute; inset:4px; border-radius:50%; background:#fff;
+}
+.opt:has(input:checked){
+  background:linear-gradient(90deg, var(--gold-50), #FFFFFF 60%);
+  border-color:var(--gold-400);
+  color:var(--ink-1); font-weight:700;
+}
+.opt input:disabled{cursor:default; opacity:.8}
+
+/* inputs */
+.input, textarea, select{
+  width:100%;
+  padding:13px 16px;
+  font-family:var(--ff); font-size:14px; font-weight:500;
+  color:var(--ink-1);
+  background:var(--surface-2);
+  border:1.5px solid var(--line);
+  border-radius:var(--r-sm);
+  transition:all .2s ease;
+}
+.input:focus, textarea:focus, select:focus{
+  outline:none;
+  border-color:var(--gold-400);
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(212,175,55,.12);
+}
+.input:disabled, textarea:disabled, select:disabled{
+  background:var(--line-2); color:var(--ink-2); cursor:default;
+}
+textarea{
+  resize:vertical; min-height:120px;
+  line-height:1.7; font-size:14px;
+}
+select{
+  cursor:pointer;
+  appearance:none; -webkit-appearance:none;
+  background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236B7789' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  background-size:16px;
+  padding-right:42px;
+}
+
+/* fill-in blank */
+.blank{
+  display:inline-block;
+  width:auto; min-width:180px;
+  padding:5px 12px; margin:0 3px;
+  background:var(--gold-50);
+  border:0; border-bottom:2px solid var(--gold-400);
+  border-radius:6px 6px 0 0;
+  font-family:var(--ff); font-weight:700;
+  font-size:14px; color:var(--gold-700);
+  transition:all .2s ease;
+  vertical-align:baseline;
+}
+.blank::placeholder{color:var(--gold-300); font-weight:600}
+.blank:focus{
+  outline:none; background:#fff;
+  box-shadow:0 0 0 4px rgba(212,175,55,.14);
+}
+
+/* matching */
+.match-wrap{
+  display:flex; flex-direction:column; gap:2px;
+  padding:0;
+}
+.match-row{
+  display:flex; align-items:center; gap:14px;
+  padding:14px 4px;
+  border-bottom:1px dashed var(--line);
+  transition:background .2s ease;
+  border-radius:var(--r-xs);
+}
+.match-row:last-child{border-bottom:0}
+.match-term{
+  flex:0 0 32%;
+  display:flex; align-items:center; gap:11px;
+  font-size:14px; font-weight:700; color:var(--ink-1);
+}
+.match-row select{flex:1; font-size:13.5px}
+
+/* ═══════════════════════════════════════════
+   RESULT
+   ═══════════════════════════════════════════ */
+.result{
+  display:none; margin-top:52px;
+  background:linear-gradient(160deg, #FFFFFF 0%, #FFFDF6 100%);
+  border:1px solid var(--line);
+  border-radius:var(--r-xl);
+  padding:56px 48px;
+  text-align:center;
+  box-shadow:var(--sh-4);
+  position:relative;
+  overflow:hidden;
+  animation:reveal .6s cubic-bezier(.2,.8,.2,1);
+}
+.result::before{
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:5px;
+  background:linear-gradient(90deg, var(--gold-300), var(--gold-500), var(--gold-300));
+}
+.result-badge{
+  width:92px; height:92px; margin:0 auto 22px;
+  border-radius:28px;
+  display:grid; place-items:center;
+  font-size:44px;
+  background:linear-gradient(140deg, var(--gold-100), var(--gold-200));
+  border:1px solid var(--gold-300);
+  box-shadow:0 12px 32px rgba(212,175,55,.22);
+  animation:bounceIn .7s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes bounceIn{
+  0%{transform:scale(0); opacity:0}
+  60%{transform:scale(1.1)}
+  100%{transform:scale(1); opacity:1}
+}
+.result h2{
+  font-family:var(--ff-display);
+  font-size:26px; font-weight:700; letter-spacing:-.02em;
+  margin-bottom:6px;
+}
+.result .score{
+  font-family:var(--ff-display);
+  font-size:72px; font-weight:700;
+  line-height:1; letter-spacing:-.03em;
+  background:linear-gradient(135deg, var(--gold-400), var(--gold-700));
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin:14px 0 4px;
+}
+.result .score small{
+  font-size:24px; font-weight:600; opacity:.55;
+}
+.result .msg{
+  font-size:15px; font-weight:600; color:var(--ink-2);
+  margin-top:6px;
+}
+.bd-grid{
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
+  gap:10px; margin-top:36px; text-align:left;
+}
+.bd{
+  background:var(--surface); border:1px solid var(--line);
+  border-radius:var(--r-md); padding:14px 16px;
+  box-shadow:var(--sh-1);
+}
+.bd .k{
+  font-size:10.5px; font-weight:800; letter-spacing:.8px;
+  text-transform:uppercase; color:var(--ink-4);
+  margin-bottom:4px;
+}
+.bd .v{
+  font-family:var(--ff-display); font-size:18px; font-weight:700;
+  color:var(--ink-1);
+}
+.bd .v small{font-size:12px; opacity:.5; font-weight:600}
+
+/* ═══════════════════════════════════════════
+   ANSWER KEY
+   ═══════════════════════════════════════════ */
+.key{
+  display:none; margin-top:36px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-left:4px solid var(--danger);
+  border-radius:var(--r-xl);
+  padding:44px 48px;
+  box-shadow:var(--sh-4);
+  animation:reveal .6s cubic-bezier(.2,.8,.2,1) .15s both;
+}
+.key > h2{
+  font-family:var(--ff-display);
+  font-size:24px; font-weight:700; letter-spacing:-.02em;
+  color:var(--danger);
+  padding-bottom:16px; margin-bottom:6px;
+  border-bottom:1px solid var(--line);
+  display:flex; align-items:center; gap:12px;
+}
+.key h3{
+  font-size:12px; font-weight:800; letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  background:var(--surface-2);
+  border-left:3px solid var(--gold-400);
+  padding:9px 14px; border-radius:0 var(--r-sm) var(--r-sm) 0;
+  margin:30px 0 14px;
+}
+.key p{
+  font-size:13.5px; line-height:1.75; color:var(--ink-2);
+  padding-bottom:8px; margin-bottom:8px;
+  border-bottom:1px dotted var(--line);
+}
+.key p:last-child{border-bottom:0}
+.key p strong{color:var(--gold-700); font-weight:800}
+.key code{
+  font-size:11.5px; padding:1px 6px;
+}
+
+/* ═══════════════════════════════════════════
+   TIMER
+   ═══════════════════════════════════════════ */
+.timer{
+  position:fixed; top:84px; right:28px; z-index:300;
+  display:none; align-items:center; gap:10px;
+  padding:12px 22px;
+  border-radius:100px;
+  background:linear-gradient(135deg, #E05252, #B83838);
+  color:#fff;
+  font-family:var(--ff-display); font-weight:700; font-size:17px;
+  letter-spacing:.4px;
+  box-shadow:0 12px 28px rgba(224,82,82,.35), inset 0 1px 0 rgba(255,255,255,.25);
+  border:1.5px solid rgba(255,255,255,.25);
+  transition:all .4s ease;
+}
+.timer.on{display:flex}
+.timer.warn{
+  background:linear-gradient(135deg, #E67E22, #C25E00);
+  box-shadow:0 12px 28px rgba(230,126,34,.42), inset 0 1px 0 rgba(255,255,255,.25);
+  animation:tick 1.4s infinite;
+}
+@keyframes tick{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.05)}
+}
+.timer svg{width:16px; height:16px}
+
+/* ═══════════════════════════════════════════
+   TOAST
+   ═══════════════════════════════════════════ */
+.toast{
+  position:fixed; bottom:28px; left:50%; z-index:500;
+  transform:translate(-50%, 140%);
+  padding:14px 26px;
+  border-radius:100px;
+  background:var(--ink-1); color:#fff;
+  font-size:13.5px; font-weight:600;
+  box-shadow:var(--sh-4);
+  transition:transform .45s cubic-bezier(.2,.8,.2,1);
+  max-width:90vw; text-align:center;
+}
+.toast.show{transform:translate(-50%, 0)}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════ */
+@media (max-width:860px){
+  .topbar-inner{padding:12px 18px; gap:12px}
+  .brand-text small{display:none}
+  .brand-text h1{font-size:12.5px}
+  .student-chip{padding:7px 12px; font-size:11.5px}
+  .student-chip .label{display:none}
+
+  .tabbar-wrap{top:65px; padding:10px 18px}
+  .tabbar{width:100%; justify-content:center}
+  .tab{flex:1; justify-content:center; padding:10px 14px; font-size:12.5px}
+
+  .page{padding:22px 16px 80px}
+  .notes-hero{padding:28px 24px}
+  .notes-hero h2{font-size:24px}
+  .hero-stats{gap:16px}
+  .hero-stat .num{font-size:17px}
+
+  .lesson summary{padding:18px 18px}
+  .lesson-body{padding:6px 18px 22px}
+  .lesson .l-num{width:30px; height:30px; font-size:12px}
+  .lesson .l-title{font-size:14px}
+
+  .pros-cons{grid-template-columns:1fr}
+
+  .start-card{padding:36px 24px}
+  .fact-grid{grid-template-columns:1fr; gap:10px}
+  .fact-box{padding:16px 12px; display:flex; align-items:center; justify-content:space-between}
+  .fact-box .n{font-size:24px}
+  .fact-box .l{margin-top:0}
+
+  .exam-bar{top:120px; padding:14px 16px}
+  .exam-bar-row{gap:14px}
+  .exam-bar-left{width:100%}
+
+  .q{padding:18px 18px}
+  .q-text{font-size:13.5px}
+  .opt{padding:11px 13px; font-size:13.5px}
+
+  .match-row{flex-direction:column; align-items:stretch; gap:10px}
+  .match-term{flex:none}
+
+  .timer{top:auto; bottom:20px; right:16px; font-size:15px; padding:10px 16px}
+
+  .result{padding:36px 22px}
+  .result .score{font-size:54px}
+  .key{padding:28px 20px}
+  .key h2{font-size:20px}
+}
+
+@media (max-width:480px){
+  .tab span.lbl-full{display:none}
+  .tab span.lbl-short{display:inline}
+}
+.tab span.lbl-short{display:none}
+
+/* ═══════════════════════════════════════════
+   DETAILED ENGLISH STUDY NOTES
+   ═══════════════════════════════════════════ */
+.note-subtitle{
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.55px;
+  text-transform:uppercase;
+  color:var(--gold-700);
+  margin:22px 0 9px;
+}
+.study-code{
+  margin:12px 0 16px;
+  padding:18px 20px;
+  border-radius:var(--r-md);
+  background:#111827;
+  color:#F8FAFC;
+  border:1px solid #263246;
+  overflow:auto;
+  font:12.5px/1.75 ui-monospace,'SF Mono',Menlo,monospace;
+  user-select:text;
+}
+.detail-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin:16px 0;
+}
+.detail-card{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  padding:14px 15px;
+  border:1px solid var(--line);
+  border-radius:var(--r-sm);
+  background:linear-gradient(145deg,#fff,#fbfcfd);
+}
+.detail-card strong{font-size:12px;color:var(--gold-700);text-transform:uppercase;letter-spacing:.5px}
+.detail-card span{font-size:13px;color:var(--ink-2);line-height:1.6}
+.exam-focus{
+  margin-top:18px;
+  padding:16px 18px;
+  border:1px solid var(--gold-200);
+  border-left:4px solid var(--gold-400);
+  border-radius:0 var(--r-sm) var(--r-sm) 0;
+  background:linear-gradient(120deg,var(--gold-50),#fff);
+}
+.exam-focus strong{
+  display:block;
+  color:var(--gold-700);
+  font-size:12px;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+.exam-focus ul,.study-list{margin:0;padding-left:20px}
+.exam-focus li,.study-list li{
+  font-size:13.5px;
+  line-height:1.7;
+  color:var(--ink-2);
+  margin-bottom:5px;
+}
+.exam-focus li:last-child,.study-list li:last-child{margin-bottom:0}
+.comparison-table{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin:14px 0;
+}
+.comparison-table > div{
+  padding:15px 16px;
+  border:1px solid var(--line);
+  border-radius:var(--r-sm);
+  background:var(--surface-2);
+}
+.comparison-table strong{
+  display:block;
+  color:var(--ink-1);
+  margin-bottom:5px;
+  font-size:13px;
+}
+.comparison-table span{
+  display:block;
+  color:var(--ink-2);
+  font-size:13.2px;
+  line-height:1.65;
+}
+.topology-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin:14px 0;
+}
+.topology-card{
+  padding:16px;
+  border:1px solid var(--line);
+  border-radius:var(--r-md);
+  background:linear-gradient(145deg,#fff,#fbfcfd);
+}
+.topology-card strong{display:block;color:var(--gold-700);font-size:14px;margin-bottom:5px}
+.topology-card span{display:block;color:var(--ink-2);font-size:13.2px;line-height:1.6}
+.topology-card em{display:block;color:var(--ink-4);font-size:12px;line-height:1.55;margin-top:7px}
+.study-method{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  margin-top:10px;
+  padding:20px 22px;
+  border:1px solid var(--line);
+  border-radius:var(--r-lg);
+  background:linear-gradient(135deg,#fff,#fffdf5);
+  box-shadow:var(--sh-2);
+}
+.study-method strong{font-size:14px;color:var(--ink-1)}
+.study-method p{margin-top:5px;font-size:13px;color:var(--ink-2);line-height:1.65;max-width:720px}
+.study-steps{display:flex;flex-wrap:wrap;gap:7px;justify-content:flex-end}
+.study-steps span{
+  padding:7px 11px;
+  border-radius:100px;
+  background:var(--gold-50);
+  border:1px solid var(--gold-200);
+  color:var(--gold-700);
+  font-size:11px;
+  font-weight:800;
+}
+@media(max-width:760px){
+  .detail-grid,.comparison-table,.topology-grid{grid-template-columns:1fr}
+  .study-method{flex-direction:column;align-items:flex-start}
+  .study-steps{justify-content:flex-start}
+}
+
+</style>
+</head>
+
+<body oncontextmenu="return false;">
+
+<!-- ═══════════ HEADER ═══════════ -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-mark">
+        <img src="logo1.png" alt="House of J&S" onerror="this.style.display='none'; this.parentNode.querySelector('span').style.display='block';">
+        <span style="display:none">J&amp;S</span>
+      </div>
+      <div class="brand-text">
+        <h1>House of J&amp;S Computer Training Center</h1>
+        <small>Student Dashboard</small>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="student-chip">
+        <span class="pulse"></span>
+        <span class="label">Year 9 ·</span> Student
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════ TABS ═══════════ -->
+<div class="tabbar-wrap">
+  <div class="tabbar">
+    <button class="tab active" data-tab="notes">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      <span class="lbl-full">Study Notes</span><span class="lbl-short">Notes</span>
+    </button>
+    <button class="tab" data-tab="exam">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      <span class="lbl-full">Exam</span><span class="lbl-short">Exam</span>
+      <span class="count">100</span>
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════ TIMER ═══════════ -->
+<div class="timer" id="timer">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5"/><path d="M9 2h6"/></svg>
+  <span id="timerText">60:00</span>
+</div>
+
+<main class="page">
+
+<!-- ═══════════════════════════════════════════
+     VIEW · STUDY NOTES
+     ═══════════════════════════════════════════ -->
+<section id="view-notes" class="view active">
+
+  <div class="notes-hero">
+    <div class="hero-tag"><span></span> Mid-Term Revision</div>
+    <h2>Detailed Study Notes <em>Year 9 Mid-Term</em></h2>
+    <p>Detailed English-only revision notes for every lesson in the examination scope. Open each lesson to study definitions, explanations, examples, comparisons, and exam-focused points.</p>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="icon">📚</div>
+        <div><div class="num">3</div><div class="lbl">Units</div></div>
+      </div>
+      <div class="hero-stat">
+        <div class="icon">📖</div>
+        <div><div class="num">7</div><div class="lbl">Lessons</div></div>
+      </div>
+      <div class="hero-stat">
+        <div class="icon">🎯</div>
+        <div><div class="num">62</div><div class="lbl">Exam Qs</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── UNIT 6 ─── -->
+  <div class="unit">
+    <div class="unit-header">
+      <span class="unit-chip"><span class="dot"></span> Unit 6</span>
+      <h3>Web Authoring</h3>
+      <span class="line"></span>
+    </div>
+
+    <details class="lesson" open>
+      <summary>
+        <span class="l-num">01</span>
+        <span class="l-title">
+          Introduction to HTML &amp; HTML Basics
+          <small>L1 · L2</small>
+        </span>
+        <span class="chev">▼</span>
+      </summary>
+      <div class="lesson-body">
+        <p><strong>HTML (Hypertext Markup Language)</strong> is the standard markup language used to create and structure the content of web pages. HTML is not a programming language; it describes the structure and meaning of content by using elements and tags.</p>
+
+        <h4 class="note-subtitle">What does HTML do?</h4>
+        <p>HTML tells a web browser what each part of a page represents. For example, a heading is marked as a heading, normal text is placed in a paragraph, an image is inserted with an image element, and a hyperlink is created with an anchor element. The browser reads the HTML document and renders the page for the user.</p>
+
+        <div class="tag-row">
+          <span class="tag"><b>&lt;html&gt;</b> root element</span>
+          <span class="tag"><b>&lt;head&gt;</b> page information</span>
+          <span class="tag"><b>&lt;title&gt;</b> browser-tab title</span>
+          <span class="tag"><b>&lt;body&gt;</b> visible content</span>
+        </div>
+
+        <h4 class="note-subtitle">Important HTML elements</h4>
+        <div class="tag-row">
+          <span class="tag"><b>&lt;h1&gt;</b>–<b>&lt;h6&gt;</b> headings</span>
+          <span class="tag"><b>&lt;p&gt;</b> paragraph</span>
+          <span class="tag"><b>&lt;br&gt;</b> line break</span>
+          <span class="tag"><b>&lt;ul&gt;</b> unordered list</span>
+          <span class="tag"><b>&lt;ol&gt;</b> ordered list</span>
+          <span class="tag"><b>&lt;li&gt;</b> list item</span>
+          <span class="tag"><b>&lt;a href&gt;</b> hyperlink</span>
+          <span class="tag"><b>&lt;img src&gt;</b> image</span>
+        </div>
+
+        <h4 class="note-subtitle">Basic document structure</h4>
+        <pre class="study-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;My Web Page&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Welcome&lt;/h1&gt;
+    &lt;p&gt;This is my first web page.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+
+        <p><strong>How to remember the structure:</strong> <code>&lt;html&gt;</code> contains the whole document. <code>&lt;head&gt;</code> contains information about the document that is generally not displayed as page content. <code>&lt;body&gt;</code> contains the content users see on the page.</p>
+
+        <div class="detail-grid">
+          <div class="detail-card"><strong>Tag</strong><span>A markup name such as <code>&lt;p&gt;</code> or <code>&lt;h1&gt;</code>.</span></div>
+          <div class="detail-card"><strong>Element</strong><span>A complete HTML component, usually including an opening tag, content, and closing tag.</span></div>
+          <div class="detail-card"><strong>Attribute</strong><span>Extra information inside an opening tag, such as <code>href</code> or <code>src</code>.</span></div>
+        </div>
+
+        <div class="exam-focus">
+          <strong>Exam Focus</strong>
+          <ul>
+            <li>Know the full meaning of HTML: <strong>Hypertext Markup Language</strong>.</li>
+            <li>Know the purpose of <code>&lt;head&gt;</code> and <code>&lt;body&gt;</code>.</li>
+            <li>Remember <code>&lt;br&gt;</code> creates a line break.</li>
+            <li>Remember <code>&lt;a&gt;</code> creates a hyperlink and <code>href</code> identifies its destination.</li>
+            <li>Remember <code>&lt;img&gt;</code> displays an image and <code>src</code> identifies the image source.</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <details class="lesson">
+      <summary>
+        <span class="l-num">02</span>
+        <span class="l-title">
+          WYSIWYG Software
+          <small>L5</small>
+        </span>
+        <span class="chev">▼</span>
+      </summary>
+      <div class="lesson-body">
+        <p><strong>WYSIWYG</strong> means <em>What You See Is What You Get</em>. WYSIWYG web-authoring software allows a user to create or edit a web page visually rather than writing every line of HTML manually.</p>
+
+        <h4 class="note-subtitle">How WYSIWYG software works</h4>
+        <p>The user works with a visual editor that resembles the final web page. They can add text, images, buttons, tables, links, and other objects through menus, panels, or drag-and-drop tools. The software generates or edits the underlying HTML and related files.</p>
+
+        <p><strong>Examples from the notes:</strong> Adobe Dreamweaver and Mobirise.</p>
+
+        <div class="pros-cons">
+          <div class="pc pros">
+            <h5>✓ Advantages</h5>
+            <ul>
+              <li><strong>Faster workflow:</strong> common page elements can be created quickly.</li>
+              <li><strong>Beginner friendly:</strong> users can design visually without knowing every HTML tag.</li>
+              <li><strong>Instant visual preview:</strong> the designer can see approximately how the page will look.</li>
+              <li><strong>Useful for templates:</strong> repeated page layouts can be created more efficiently.</li>
+            </ul>
+          </div>
+          <div class="pc cons">
+            <h5>✗ Disadvantages</h5>
+            <ul>
+              <li><strong>Messy generated code:</strong> automatic code may contain unnecessary elements or formatting.</li>
+              <li><strong>Less fine-grained control:</strong> advanced users may need direct HTML/CSS editing.</li>
+              <li><strong>Possible cost:</strong> some professional tools require a paid licence.</li>
+              <li><strong>Learning is still important:</strong> understanding HTML helps users troubleshoot generated pages.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h4 class="note-subtitle">When should you use WYSIWYG software?</h4>
+        <p>It is especially useful when a learner needs to build a website quickly, when visual design is important, or when the user is still developing coding skills. For complex websites, understanding the generated HTML is still valuable because visual tools do not remove the need for good structure, testing, accessibility, and maintenance.</p>
+
+        <div class="detail-grid">
+          <div class="detail-card"><strong>Visual editing</strong><span>Work with page elements through a graphical interface.</span></div>
+          <div class="detail-card"><strong>Code generation</strong><span>The software creates or modifies the underlying web code.</span></div>
+          <div class="detail-card"><strong>Preview</strong><span>Check the visual appearance before publishing the site.</span></div>
+        </div>
+
+        <div class="exam-focus">
+          <strong>Exam Focus</strong>
+          <ul>
+            <li>WYSIWYG = <strong>What You See Is What You Get</strong>.</li>
+            <li>The main idea is <strong>visual web-page creation without manually writing all the code</strong>.</li>
+            <li>A key advantage is that it is <strong>faster and easier for beginners</strong>.</li>
+            <li>A key disadvantage is that generated code can be <strong>messy or less controllable</strong>.</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <details class="lesson">
+      <summary>
+        <span class="l-num">03</span>
+        <span class="l-title">
+          Multimedia Web Content
+          <small>L6</small>
+        </span>
+        <span class="chev">▼</span>
+      </summary>
+      <div class="lesson-body">
+        <p><strong>Multimedia web content</strong> includes media such as images, audio, video, maps, and other interactive or externally hosted content. Multimedia can make a website more informative and engaging when it is relevant to the purpose of the page.</p>
+
+        <h4 class="note-subtitle">Embedded content</h4>
+        <p><strong>Embedded content</strong> is content supplied by another service or website and displayed inside your own web page. A common method is the <code>&lt;iframe&gt;</code> element.</p>
+
+        <pre class="study-code">&lt;iframe
+  src="https://example.com/video"
+  title="Example embedded content"&gt;
+&lt;/iframe&gt;</pre>
+
+        <p>The page does not necessarily store a complete copy of the external content. Instead, the browser loads the embedded resource according to the source and its permissions.</p>
+
+        <div class="pros-cons">
+          <div class="pc pros">
+            <h5>✓ Advantages</h5>
+            <ul>
+              <li>No need to host every external media file yourself.</li>
+              <li>Can save server storage for externally hosted content.</li>
+              <li>Can add useful videos, maps, or other resources quickly.</li>
+              <li>Can improve the learning experience when media supports the topic.</li>
+            </ul>
+          </div>
+          <div class="pc cons">
+            <h5>✗ Disadvantages</h5>
+            <ul>
+              <li>If the source removes or changes the content, your page may also be affected.</li>
+              <li>Heavy embedded content can increase loading time.</li>
+              <li>The external service may require an internet connection.</li>
+              <li>Permissions, copyright, privacy, and source policies must be considered.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h4 class="note-subtitle">Good practice when using multimedia</h4>
+        <ul class="study-list">
+          <li>Use media that directly supports the purpose of the page.</li>
+          <li>Use appropriate titles or labels so users understand the content.</li>
+          <li>Compress large images and media where appropriate to improve performance.</li>
+          <li>Check that external content is still available.</li>
+          <li>Respect copyright and obtain permission where required.</li>
+          <li>Test the page on different screen sizes and browsers.</li>
+        </ul>
+
+        <div class="exam-focus">
+          <strong>Exam Focus</strong>
+          <ul>
+            <li>Know that <code>&lt;iframe&gt;</code> can be used to embed external content.</li>
+            <li>Remember the two key disadvantages in this syllabus: <strong>source removal/change</strong> and <strong>slower loading</strong>.</li>
+            <li>Be able to explain why embedded content can reduce the amount of media that must be hosted directly.</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- ─── UNIT 3 ─── -->
+  <div class="unit">
+    <div class="unit-header">
+      <span class="unit-chip"><span class="dot"></span> Unit 3</span>
+      <h3>Input · Process · Output</h3>
+      <span class="line"></span>
+    </div>
+
+    <details class="lesson">
+      <summary>
+        <span class="l-num">04</span>
+        <span class="l-title">
+          Computer Components &amp; I/O System
+          <small>L1 · L2</small>
+        </span>
+        <span class="chev">▼</span>
+      </summary>
+      <div class="lesson-body">
+        <p>A computer system can be understood through the <strong>Input → Process → Output</strong> model. Input devices provide data to the computer, the processor works on that data, and output devices present the resulting information to the user.</p>
+
+        <div class="detail-grid">
+          <div class="detail-card"><strong>Input</strong><span>Data or instructions entered into a computer, for example through a keyboard, mouse, microphone, scanner, or touchscreen.</span></div>
+          <div class="detail-card"><strong>Process</strong><span>The CPU processes instructions and data to perform calculations and make decisions.</span></div>
+          <div class="detail-card"><strong>Output</strong><span>Information produced by the system, such as text on a monitor, printed documents, sound, or a projected image.</span></div>
+        </div>
+
+        <dl class="kv-list">
+          <dt>Input Devices</dt><dd>Keyboard, mouse, microphone, scanner, touchscreen.</dd>
+          <dt>Output Devices</dt><dd>Monitor, printer, speaker, projector.</dd>
+          <dt>CPU</dt><dd>Central Processing Unit; it executes instructions and processes data.</dd>
+          <dt>Motherboard</dt><dd>The main circuit board that provides connections between major computer components.</dd>
+          <dt>RAM</dt><dd>Volatile working memory used for data and programs currently in use.</dd>
+          <dt>ROM</dt><dd>Non-volatile memory associated with essential startup instructions or firmware.</dd>
+        </dl>
+
+        <h4 class="note-subtitle">Example of the Input–Process–Output cycle</h4>
+        <p>Suppose a student enters <strong>10 + 5</strong> using a keyboard. The keyboard provides the input. The CPU processes the arithmetic operation. The monitor then displays the output <strong>15</strong>.</p>
+
+        <h4 class="note-subtitle">RAM vs ROM</h4>
+        <div class="comparison-table">
+          <div><strong>RAM</strong><span>Volatile; temporary working storage; contents are lost when power is removed.</span></div>
+          <div><strong>ROM</strong><span>Non-volatile; retains information when power is removed; used for essential startup/firmware information.</span></div>
+        </div>
+
+        <div class="exam-focus">
+          <strong>Exam Focus</strong>
+          <ul>
+            <li>Keyboard and mouse are examples of <strong>input</strong> devices.</li>
+            <li>Monitor and printer are examples of <strong>output</strong> devices.</li>
+            <li>CPU = <strong>Central Processing Unit</strong>.</li>
+            <li>RAM is <strong>volatile</strong>; ROM is <strong>non-volatile</strong>.</li>
+            <li>The motherboard connects major components of the computer.</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <details class="lesson">
+      <summary>
+        <span class="l-num">05</span>
+        <span class="l-title">
+          RISC &amp; CISC Processors
+          <small>L5</small>
+        </span>
+        <span class="chev">▼</span>
+      </summary>
+      <div class="lesson-body">
+        <p><strong>RISC</strong> and <strong>CISC</strong> describe different approaches to processor instruction sets.</p>
+
+        <div class="comparison-table">
+          <div><strong>RISC</strong><span><strong>Reduced Instruction Set Computer.</strong> Uses a relatively small set of simple instructions. The approach aims to make instructions straightforward and efficient to execute.</span></div>
+          <div><strong>CISC</strong><span><strong>Complex Instruction Set Computer.</strong> Uses a larger set of more complex instructions, with some instructions capable of performing more work.</span></div>
+        </div>
+
+        <h4 class="note-subtitle">RISC characteristics</h4>
+        <ul class="study-list">
+          <li>Uses a smaller collection of simple instructions.</li>
+          <li>Instructions are designed to be efficient and relatively straightforward.</li>
+          <li>The approach is associated with efficient processing and lower power use in many modern devices.</li>
+          <li>The syllabus associates RISC with modern devices such as smartphones and tablets.</li>
+        </ul>
+
+        <h4 class="note-subtitle">CISC characteristics</h4>
+        <ul class="study-list">
+          <li>Provides a larger collection of more complex instructions.</li>
+          <li>A single instruction may perform a more complicated operation.</li>
+          <li>The syllabus associates CISC with older personal-computer designs and higher power requirements.</li>
+        </ul>
+
+        <p><strong>Easy memory trick:</strong> <strong>RISC = Reduced + Simple</strong>; <strong>CISC = Complex + Large</strong>.</p>
+
+        <div class="exam-focus">
+          <strong>Exam Focus</strong>
+          <ul>
+            <li>RISC stands for <strong>Reduced Instruction Set Computer</strong>.</li>
+            <li>CISC stands for <strong>Complex Instruction Set Computer</strong>.</li>
+            <li>RISC is associated with a smaller set of simple instructions.</li>
+            <li>CISC is associated with a larger set of complex instructions.</li>
+            <li>Be prepared to compare them in terms of instruction complexity, efficiency, and typical use.</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <details class="lesson">
+      <summary>
+        <span class="l-num">06</span>
+        <span class="l-title">
+          BIOS and ROM
+          <small>L6</small>
+        </span>
+        <span class="chev">▼</span>
+      </summary>
+      <div class="lesson-body">
+        <p><strong>BIOS (Basic Input/Output System)</strong> is firmware that helps a computer start. When the computer is switched on, firmware performs important startup tasks before the operating system is fully loaded.</p>
+
+        <h4 class="note-subtitle">What happens during startup?</h4>
+        <ol class="study-list">
+          <li>The computer is powered on.</li>
+          <li>The firmware begins running.</li>
+          <li>Hardware is checked during the startup process, commonly referred to as <strong>POST (Power-On Self-Test)</strong>.</li>
+          <li>The firmware identifies the resources needed for startup.</li>
+          <li>The boot process continues and the operating system is loaded.</li>
+        </ol>
+
+        <p><strong>UEFI (Unified Extensible Firmware Interface)</strong> is the modern firmware interface that has largely replaced traditional BIOS implementations. In the syllabus context, UEFI is associated with support for larger drives and faster booting.</p>
+
+        <h4 class="note-subtitle">Why firmware matters</h4>
+        <p>The operating system cannot simply appear by itself when the computer is powered on. The system needs low-level startup instructions to initialise hardware and begin the boot process. Firmware provides this early-stage functionality.</p>
+
+        <div class="comparison-table">
+          <div><strong>BIOS</strong><span>Traditional firmware interface used during startup to initialise hardware and begin loading the operating system.</span></div>
+          <div><strong>UEFI</strong><span>Modern firmware interface with additional capabilities, including support for larger drives and modern boot features.</span></div>
+        </div>
+
+        <div class="exam-focus">
+          <strong>Exam Focus</strong>
+          <ul>
+            <li>BIOS = <strong>Basic Input/Output System</strong>.</li>
+            <li>BIOS/firmware is used to <strong>start the computer, check hardware, and begin loading the operating system</strong>.</li>
+            <li>POST is the hardware-checking stage during startup.</li>
+            <li>UEFI is the modern replacement for traditional BIOS implementations.</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- ─── UNIT 4 ─── -->
+  <div class="unit">
+    <div class="unit-header">
+      <span class="unit-chip"><span class="dot"></span> Unit 4</span>
+      <h3>Computing for All</h3>
+      <span class="line"></span>
+    </div>
+
+    <details class="lesson">
+      <summary>
+        <span class="l-num">07</span>
+        <span class="l-title">
+          Network Types &amp; Topologies
+          <small>L1 · L2</small>
+        </span>
+        <span class="chev">▼</span>
+      </summary>
+      <div class="lesson-body">
+        <p>A <strong>computer network</strong> is a collection of connected devices that can communicate and share resources. Networks can be classified by their geographical coverage and by their physical or logical layout, called a <strong>topology</strong>.</p>
+
+        <h4 class="note-subtitle">Network Types</h4>
+        <dl class="kv-list">
+          <dt>LAN</dt><dd><strong>Local Area Network.</strong> Covers a relatively small area such as a home, classroom, office, or single building.</dd>
+          <dt>WAN</dt><dd><strong>Wide Area Network.</strong> Covers a large geographical area and can connect networks across cities, countries, or continents. The Internet is a major example of a WAN.</dd>
+          <dt>PAN</dt><dd><strong>Personal Area Network.</strong> A small network centred around one person, commonly using short-range technologies such as Bluetooth.</dd>
+        </dl>
+
+        <h4 class="note-subtitle">Network Topologies / Layouts</h4>
+        <div class="topology-grid">
+          <div class="topology-card">
+            <strong>Point-to-point</strong>
+            <span>One direct connection between two devices.</span>
+            <em>Example: a direct computer-to-printer connection.</em>
+          </div>
+          <div class="topology-card">
+            <strong>Bus</strong>
+            <span>Devices share a single main backbone cable.</span>
+            <em>Advantage: simple and relatively inexpensive. Disadvantage: backbone failure can affect the whole network.</em>
+          </div>
+          <div class="topology-card">
+            <strong>Ring</strong>
+            <span>Devices form a closed loop. In the syllabus model, data travels around the ring in one direction.</span>
+            <em>Potential issue: data may need to pass through several devices.</em>
+          </div>
+          <div class="topology-card">
+            <strong>Star</strong>
+            <span>Each device connects to a central hub or switch.</span>
+            <em>Common in homes and offices; one device failing normally does not disconnect the other devices.</em>
+          </div>
+          <div class="topology-card">
+            <strong>Mesh</strong>
+            <span>Devices have multiple direct connections, with the full mesh connecting each device to every other device.</span>
+            <em>Very reliable because alternative paths can exist, but it is expensive and complex.</em>
+          </div>
+        </div>
+
+        <h4 class="note-subtitle">Why topology matters</h4>
+        <p>The topology affects how devices communicate, how easy a network is to maintain, what happens when a connection fails, and how much equipment or cabling is required. A suitable topology depends on the size, cost, reliability requirements, and purpose of the network.</p>
+
+        <div class="comparison-table">
+          <div><strong>Star</strong><span>Central device; easy to manage; common in modern homes and offices; central-device failure can affect the network.</span></div>
+          <div><strong>Mesh</strong><span>Multiple paths; highly reliable and redundant; more expensive and complicated to install.</span></div>
+          <div><strong>Bus</strong><span>Shared backbone; inexpensive and simple, but backbone problems can affect many devices.</span></div>
+          <div><strong>Ring</strong><span>Closed loop; data follows the ring; communication can depend on the path through other devices.</span></div>
+        </div>
+
+        <h4 class="note-subtitle">PAN example</h4>
+        <p>A smartphone connected to Bluetooth headphones is a simple example of a <strong>PAN</strong>. The devices are close to one person and communicate over a short range.</p>
+
+        <div class="exam-focus">
+          <strong>Exam Focus</strong>
+          <ul>
+            <li>LAN = <strong>Local Area Network</strong>.</li>
+            <li>WAN = <strong>Wide Area Network</strong>.</li>
+            <li>PAN = <strong>Personal Area Network</strong>.</li>
+            <li>Star uses a <strong>central hub/switch</strong>.</li>
+            <li>Mesh provides <strong>high redundancy and reliability</strong> through multiple connections.</li>
+            <li>Bus uses a <strong>single backbone cable</strong>.</li>
+            <li>Ring forms a <strong>closed loop</strong>.</li>
+            <li>Point-to-point is a <strong>direct connection between two devices</strong>.</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="study-method">
+    <div>
+      <strong>Recommended Study Method</strong>
+      <p>Read the definition first, then study the explanation and example. Finally, close the lesson and try to explain the topic from memory. Pay special attention to the <strong>Exam Focus</strong> box because the same concepts appear in the examination questions.</p>
+    </div>
+    <div class="study-steps">
+      <span>1. Read</span><span>2. Understand</span><span>3. Recall</span><span>4. Practise</span>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:48px">
+    <button class="btn btn-primary btn-lg" onclick="switchTab('exam')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+      Start Exam
+    </button>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════
+     VIEW · EXAM
+     ═══════════════════════════════════════════ -->
+<section id="view-exam" class="view">
+
+  <!-- START CARD -->
+  <div class="start-card" id="startCard">
+    <div class="crest">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <line x1="9" y1="15" x2="15" y2="15"/>
+        <line x1="9" y1="11" x2="13" y2="11"/>
+      </svg>
+    </div>
+    <h2>Year 9 Mid-Term Examination</h2>
+    <p>Web Authoring · Input / Process / Output · Computing for All</p>
+
+    <div class="fact-grid">
+      <div class="fact-box"><div class="n">60</div><div class="l">Minutes</div></div>
+      <div class="fact-box"><div class="n">100</div><div class="l">Total Marks</div></div>
+      <div class="fact-box"><div class="n">62</div><div class="l">Questions</div></div>
+    </div>
+
+    <div class="rules-box">
+      <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> Instructions</h4>
+      <ul>
+        <li>The exam lasts 60 minutes and will be submitted automatically when the time expires.</li>
+        <li>Sections 1–4 are marked automatically.</li>
+        <li>Sections 5–6 (Short &amp; Long) are assessed using keyword-based scoring in this practice system.</li>
+        <li>You can submit only once, so review your answers carefully before submitting.</li>
+      </ul>
+    </div>
+
+    <button class="btn btn-primary btn-lg" onclick="startExam()">
+      <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+      Start Exam
+    </button>
+  </div>
+
+  <!-- EXAM BODY -->
+  <div id="examBody">
+
+    <div class="exam-bar">
+      <div class="exam-bar-row">
+        <div class="exam-bar-left">
+          <h3>Year 9 Mid-Term Examination</h3>
+          <p>1 Hour · 100 Marks</p>
+        </div>
+        <div class="progress-group">
+          <div class="progress-head">
+            <span><b id="progressText">0</b> of 50 answered</span>
+            <span id="progressPct">0%</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        </div>
+        <button class="btn btn-ghost" onclick="toggleFullScreen()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+          Full Screen
+        </button>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION 1 ═══ -->
+    <div class="sec">
+      <span class="sec-num">1</span>
+      <h3 class="sec-title">Multiple Choice</h3>
+      <span class="sec-marks">20 Q · 20 Marks</span>
+    </div>
+
+    <div class="q">
+      <div class="q-head"><span class="q-num">1</span><span class="q-text">What does HTML stand for?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q1" value="A"><span>A) Hypertext Markup Language</span></label>
+        <label class="opt"><input type="radio" name="q1" value="B"><span>B) Hyperlink Text Markup Language</span></label>
+        <label class="opt"><input type="radio" name="q1" value="C"><span>C) Home Tool Markup Language</span></label>
+        <label class="opt"><input type="radio" name="q1" value="D"><span>D) Hypertext Making Language</span></label>
+      </div>
+    </div>
+    <div class="q">
+      <div class="q-head"><span class="q-num">2</span><span class="q-text">Which tag creates a line break in HTML?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q2" value="A"><span>A) &lt;lb&gt;</span></label>
+        <label class="opt"><input type="radio" name="q2" value="B"><span>B) &lt;break&gt;</span></label>
+        <label class="opt"><input type="radio" name="q2" value="C"><span>C) &lt;br&gt;</span></label>
+        <label class="opt"><input type="radio" name="q2" value="D"><span>D) &lt;newline&gt;</span></label>
+      </div>
+    </div>
+    <div class="q">
+      <div class="q-head"><span class="q-num">3</span><span class="q-text">Which software is an example of WYSIWYG?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q3" value="A"><span>A) Microsoft Word</span></label>
+        <label class="opt"><input type="radio" name="q3" value="B"><span>B) Notepad</span></label>
+        <label class="opt"><input type="radio" name="q3" value="C"><span>C) Adobe Dreamweaver</span></label>
+        <label class="opt"><input type="radio" name="q3" value="D"><span>D) Python IDLE</span></label>
+      </div>
+    </div>
+    <div class="q">
+      <div class="q-head"><span class="q-num">4</span><span class="q-text">What is the main drawback of using embedded multimedia from another site?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q4" value="A"><span>A) It looks bad</span></label>
+        <label class="opt"><input type="radio" name="q4" value="B"><span>B) If the source site changes, the content may disappear</span></label>
+        <label class="opt"><input type="radio" name="q4" value="C"><span>C) It costs more money</span></label>
+        <label class="opt"><input type="radio" name="q4" value="D"><span>D) It makes the page slower</span></label>
+      </div>
+    </div>
+    <div class="q">
+      <div class="q-head"><span class="q-num">5</span><span class="q-text">What does CPU stand for?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q5" value="A"><span>A) Central Processing Unit</span></label>
+        <label class="opt"><input type="radio" name="q5" value="B"><span>B) Computer Personal Unit</span></label>
+        <label class="opt"><input type="radio" name="q5" value="C"><span>C) Central Program Unit</span></label>
+        <label class="opt"><input type="radio" name="q5" value="D"><span>D) Control Processing Unit</span></label>
+      </div>
+    </div>
+    <div class="q">
+      <div class="q-head"><span class="q-num">6</span><span class="q-text">Which of the following is an input device?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q6" value="A"><span>A) Monitor</span></label>
+        <label class="opt"><input type="radio" name="q6" value="B"><span>B) Printer</span></label>
+        <label class="opt"><input type="radio" name="q6" value="C"><span>C) Speaker</span></label>
+        <label class="opt"><input type="radio" name="q6" value="D"><span>D) Microphone</span></label>
+      </div>
+    </div>
+    <div class="q">
+      <div class="q-head"><span class="q-num">7</span><span class="q-text">Which type of processor uses a small set of simple instructions?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q7" value="A"><span>A) CISC</span></label>
+        <label class="opt"><input type="radio" name="q7" value="B"><span>B) RISC</span></label>
+        <label class="opt"><input type="radio" name="q7" value="C"><span>C) BIOS</span></label>
+        <label class="opt"><input type="radio" name="q7" value="D"><span>D) RAM</span></label>
+      </div>
+    </div>
+    <div class="q">
+      <div class="q-head"><span class="q-num">8</span><span class="q-text">What is the purpose of the BIOS?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q8" value="A"><span>A) To store user documents</span></label>
+        <label class="opt"><input type="radio" name="q8" value="B"><span>B) To connect to the internet</span></label>
+        <label class="opt"><input type="radio" name="q8" value="C"><span>C) To boot the computer and check hardware</span></label>
+        <label class="opt"><input type="radio" name="q8" value="D"><span>D) To play games</span></label>
+      </div>
+    </div>
+    <div class="q">
+      <div class="q-head"><span class="q-num">9</span><span class="q-text">Which network type covers a large geographical area, like a country?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q9" value="A"><span>A) LAN</span></label>
+        <label class="opt"><input type="radio" name="q9" value="B"><span>B) PAN</span></label>
+        <label class="opt"><input type="radio" name="q9" value="C"><span>C) WAN</span></label>
+        <label class="opt"><input type="radio" name="q9" value="D"><span>D) MAN</span></label>
+      </div>
+    </div>
+    <div class="q">
+      <div class="q-head"><span class="q-num">10</span><span class="q-text">Which network layout connects every device to every other device?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q10" value="A"><span>A) Star</span></label>
+        <label class="opt"><input type="radio" name="q10" value="B"><span>B) Ring</span></label>
+        <label class="opt"><input type="radio" name="q10" value="C"><span>C) Mesh</span></label>
+        <label class="opt"><input type="radio" name="q10" value="D"><span>D) Bus</span></label>
+      </div>
+    </div>
+    <div class="q">
+      <div class="q-head"><span class="q-num">11</span><span class="q-text">Which HTML tag contains the page title and metadata?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q11" value="A"><span>A) &lt;body&gt;</span></label>
+        <label class="opt"><input type="radio" name="q11" value="B"><span>B) &lt;head&gt;</span></label>
+        <label class="opt"><input type="radio" name="q11" value="C"><span>C) &lt;title&gt;</span></label>
+        <label class="opt"><input type="radio" name="q11" value="D"><span>D) &lt;header&gt;</span></label>
+      </div>
+    </div>
+    <div class="q">
+      <div class="q-head"><span class="q-num">12</span><span class="q-text">What is the 'brain' of the computer?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q12" value="A"><span>A) RAM</span></label>
+        <label class="opt"><input type="radio" name="q12" value="B"><span>B) Hard Drive</span></label>
+        <label class="opt"><input type="radio" name="q12" value="C"><span>C) CPU</span></label>
+        <label class="opt"><input type="radio" name="q12" value="D"><span>D) Motherboard</span></label>
+      </div>
+    </div>
+    <div class="q">
+      <div class="q-head"><span class="q-num">13</span><span class="q-text">Which type of memory is volatile (loses data when power is off)?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q13" value="A"><span>A) ROM</span></label>
+        <label class="opt"><input type="radio" name="q13" value="B"><span>B) RAM</span></label>
+        <label class="opt"><input type="radio" name="q13" value="C"><span>C) Hard Drive</span></label>
+        <label class="opt"><input type="radio" name="q13" value="D"><span>D) SSD</span></label>
+      </div>
+    </div>
+    <div class="q">
+      <div class="q-head"><span class="q-num">14</span><span class="q-text">Which network is used for Bluetooth headphones?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q14" value="A"><span>A) LAN</span></label>
+        <label class="opt"><input type="radio" name="q14" value="B"><span>B) WAN</span></label>
+        <label class="opt"><input type="radio" name="q14" value="C"><span>C) PAN</span></label>
+        <label class="opt"><input type="radio" name="q14" value="D"><span>D) VPN</span></label>
+      </div>
+    </div>
+    <div class="q">
+      <div class="q-head"><span class="q-num">15</span><span class="q-text">What does WYSIWYG stand for?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q15" value="A"><span>A) What You See Is What You Get</span></label>
+        <label class="opt"><input type="radio" name="q15" value="B"><span>B) What You Set Is What You Get</span></label>
+        <label class="opt"><input type="radio" name="q15" value="C"><span>C) What You Save Is What You Get</span></label>
+        <label class="opt"><input type="radio" name="q15" value="D"><span>D) What You Send Is What You Get</span></label>
+      </div>
+    </div>
+    <div class="q">
+      <div class="q-head"><span class="q-num">16</span><span class="q-text">Which of these is an output device?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q16" value="A"><span>A) Keyboard</span></label>
+        <label class="opt"><input type="radio" name="q16" value="B"><span>B) Mouse</span></label>
+        <label class="opt"><input type="radio" name="q16" value="C"><span>C) Monitor</span></label>
+        <label class="opt"><input type="radio" name="q16" value="D"><span>D) Scanner</span></label>
+      </div>
+    </div>
+    <div class="q">
+      <div class="q-head"><span class="q-num">17</span><span class="q-text">Which component connects all other parts of a computer?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q17" value="A"><span>A) CPU</span></label>
+        <label class="opt"><input type="radio" name="q17" value="B"><span>B) Motherboard</span></label>
+        <label class="opt"><input type="radio" name="q17" value="C"><span>C) RAM</span></label>
+        <label class="opt"><input type="radio" name="q17" value="D"><span>D) Power Supply</span></label>
+      </div>
+    </div>
+    <div class="q">
+      <div class="q-head"><span class="q-num">18</span><span class="q-text">Which network layout is the most common in homes?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q18" value="A"><span>A) Star</span></label>
+        <label class="opt"><input type="radio" name="q18" value="B"><span>B) Ring</span></label>
+        <label class="opt"><input type="radio" name="q18" value="C"><span>C) Mesh</span></label>
+        <label class="opt"><input type="radio" name="q18" value="D"><span>D) Bus</span></label>
+      </div>
+    </div>
+    <div class="q">
+      <div class="q-head"><span class="q-num">19</span><span class="q-text">What tag is used for a hyperlink in HTML?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q19" value="A"><span>A) &lt;a&gt;</span></label>
+        <label class="opt"><input type="radio" name="q19" value="B"><span>B) &lt;link&gt;</span></label>
+        <label class="opt"><input type="radio" name="q19" value="C"><span>C) &lt;href&gt;</span></label>
+        <label class="opt"><input type="radio" name="q19" value="D"><span>D) &lt;url&gt;</span></label>
+      </div>
+    </div>
+    <div class="q">
+      <div class="q-head"><span class="q-num">20</span><span class="q-text">Which processor type is used in modern electronic devices?</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q20" value="A"><span>A) CISC</span></label>
+        <label class="opt"><input type="radio" name="q20" value="B"><span>B) RISC</span></label>
+        <label class="opt"><input type="radio" name="q20" value="C"><span>C) BIOS</span></label>
+        <label class="opt"><input type="radio" name="q20" value="D"><span>D) ROM</span></label>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION 2 ═══ -->
+    <div class="sec">
+      <span class="sec-num">2</span>
+      <h3 class="sec-title">Fill in the Blanks</h3>
+      <span class="sec-marks">10 Q · 10 Marks</span>
+    </div>
+
+    <div class="q"><div class="q-head"><span class="q-num">21</span><span class="q-text">HTML stands for <input type="text" class="blank" id="f21" placeholder="……"> Markup Language.</span></div></div>
+    <div class="q"><div class="q-head"><span class="q-num">22</span><span class="q-text">The <input type="text" class="blank" id="f22" placeholder="……"> tag is used to define the title of the web page in the browser tab.</span></div></div>
+    <div class="q"><div class="q-head"><span class="q-num">23</span><span class="q-text">A network that covers a small area, like a single building, is called a <input type="text" class="blank" id="f23" placeholder="……">.</span></div></div>
+    <div class="q"><div class="q-head"><span class="q-num">24</span><span class="q-text">The <input type="text" class="blank" id="f24" placeholder="……"> is the main circuit board of a computer.</span></div></div>
+    <div class="q"><div class="q-head"><span class="q-num">25</span><span class="q-text"><input type="text" class="blank" id="f25" placeholder="……"> memory is volatile and loses its data when the power is turned off.</span></div></div>
+    <div class="q"><div class="q-head"><span class="q-num">26</span><span class="q-text">WYSIWYG stands for What You See Is What You <input type="text" class="blank" id="f26" placeholder="……">.</span></div></div>
+    <div class="q"><div class="q-head"><span class="q-num">27</span><span class="q-text">A <input type="text" class="blank" id="f27" placeholder="……"> network connects every device to every other device, making it very reliable but expensive.</span></div></div>
+    <div class="q"><div class="q-head"><span class="q-num">28</span><span class="q-text">The <input type="text" class="blank" id="f28" placeholder="……"> is firmware used to start up the computer and check hardware.</span></div></div>
+    <div class="q"><div class="q-head"><span class="q-num">29</span><span class="q-text">An <input type="text" class="blank" id="f29" placeholder="……"> device feeds data into a computer, such as a keyboard.</span></div></div>
+    <div class="q"><div class="q-head"><span class="q-num">30</span><span class="q-text">The two main types of processors are RISC and <input type="text" class="blank" id="f30" placeholder="……">.</span></div></div>
+
+    <!-- ═══ SECTION 3 ═══ -->
+    <div class="sec">
+      <span class="sec-num">3</span>
+      <h3 class="sec-title">True or False</h3>
+      <span class="sec-marks">10 Q · 10 Marks</span>
+    </div>
+
+    <div class="q"><div class="q-head"><span class="q-num">31</span><span class="q-text">HTML is a programming language used to create web pages.</span></div>
+      <select id="tf31"><option value="">— Select —</option><option>True</option><option>False</option></select></div>
+    <div class="q"><div class="q-head"><span class="q-num">32</span><span class="q-text">A WAN is smaller than a LAN.</span></div>
+      <select id="tf32"><option value="">— Select —</option><option>True</option><option>False</option></select></div>
+    <div class="q"><div class="q-head"><span class="q-num">33</span><span class="q-text">The CPU is known as the brain of the computer.</span></div>
+      <select id="tf33"><option value="">— Select —</option><option>True</option><option>False</option></select></div>
+    <div class="q"><div class="q-head"><span class="q-num">34</span><span class="q-text">ROM is volatile memory.</span></div>
+      <select id="tf34"><option value="">— Select —</option><option>True</option><option>False</option></select></div>
+    <div class="q"><div class="q-head"><span class="q-num">35</span><span class="q-text">In a Star network, if the central hub fails, the whole network fails.</span></div>
+      <select id="tf35"><option value="">— Select —</option><option>True</option><option>False</option></select></div>
+    <div class="q"><div class="q-head"><span class="q-num">36</span><span class="q-text">WYSIWYG software allows you to design a web page without writing HTML code.</span></div>
+      <select id="tf36"><option value="">— Select —</option><option>True</option><option>False</option></select></div>
+    <div class="q"><div class="q-head"><span class="q-num">37</span><span class="q-text">RISC processors are used in early electronic devices.</span></div>
+      <select id="tf37"><option value="">— Select —</option><option>True</option><option>False</option></select></div>
+    <div class="q"><div class="q-head"><span class="q-num">38</span><span class="q-text">You can embed a YouTube video into your own website using an iframe.</span></div>
+      <select id="tf38"><option value="">— Select —</option><option>True</option><option>False</option></select></div>
+    <div class="q"><div class="q-head"><span class="q-num">39</span><span class="q-text">A PAN is used for communication over a large geographical area.</span></div>
+      <select id="tf39"><option value="">— Select —</option><option>True</option><option>False</option></select></div>
+    <div class="q"><div class="q-head"><span class="q-num">40</span><span class="q-text">The motherboard connects the CPU, RAM, and hard drive.</span></div>
+      <select id="tf40"><option value="">— Select —</option><option>True</option><option>False</option></select></div>
+
+    <!-- ═══ SECTION 4 ═══ -->
+    <div class="sec">
+      <span class="sec-num">4</span>
+      <h3 class="sec-title">Matching</h3>
+      <span class="sec-marks">10 Q · 10 Marks</span>
+    </div>
+
+    <div class="q">
+      <div class="q-head" style="margin-bottom:10px"><span class="q-num">41</span><span class="q-text">Match each term in Column A with the correct description in Column B.</span></div>
+      <div class="match-wrap">
+        <div class="match-row"><div class="match-term"><span class="q-num">41</span> HTML</div>
+          <select id="m41"><option value="">— Select —</option>
+            <option value="A">A) Local Area Network</option><option value="B">B) The brain of the computer</option>
+            <option value="C">C) Language for creating web pages</option><option value="D">D) Wide Area Network</option>
+            <option value="E">E) Firmware for booting</option><option value="F">F) Short-term memory</option>
+            <option value="G">G) Network for one person</option><option value="H">H) Connects all components</option>
+            <option value="I">I) Visual web design software</option><option value="J">J) Long-term storage</option>
+          </select></div>
+
+        <div class="match-row"><div class="match-term"><span class="q-num">42</span> LAN</div>
+          <select id="m42"><option value="">— Select —</option>
+            <option value="A">A) Local Area Network</option><option value="B">B) The brain of the computer</option>
+            <option value="C">C) Language for creating web pages</option><option value="D">D) Wide Area Network</option>
+            <option value="E">E) Firmware for booting</option><option value="F">F) Short-term memory</option>
+            <option value="G">G) Network for one person</option><option value="H">H) Connects all components</option>
+            <option value="I">I) Visual web design software</option><option value="J">J) Long-term storage</option>
+          </select></div>
+
+        <div class="match-row"><div class="match-term"><span class="q-num">43</span> WAN</div>
+          <select id="m43"><option value="">— Select —</option>
+            <option value="A">A) Local Area Network</option><option value="B">B) The brain of the computer</option>
+            <option value="C">C) Language for creating web pages</option><option value="D">D) Wide Area Network</option>
+            <option value="E">E) Firmware for booting</option><option value="F">F) Short-term memory</option>
+            <option value="G">G) Network for one person</option><option value="H">H) Connects all components</option>
+            <option value="I">I) Visual web design software</option><option value="J">J) Long-term storage</option>
+          </select></div>
+
+        <div class="match-row"><div class="match-term"><span class="q-num">44</span> PAN</div>
+          <select id="m44"><option value="">— Select —</option>
+            <option value="A">A) Local Area Network</option><option value="B">B) The brain of the computer</option>
+            <option value="C">C) Language for creating web pages</option><option value="D">D) Wide Area Network</option>
+            <option value="E">E) Firmware for booting</option><option value="F">F) Short-term memory</option>
+            <option value="G">G) Network for one person</option><option value="H">H) Connects all components</option>
+            <option value="I">I) Visual web design software</option><option value="J">J) Long-term storage</option>
+          </select></div>
+
+        <div class="match-row"><div class="match-term"><span class="q-num">45</span> CPU</div>
+          <select id="m45"><option value="">— Select —</option>
+            <option value="A">A) Local Area Network</option><option value="B">B) The brain of the computer</option>
+            <option value="C">C) Language for creating web pages</option><option value="D">D) Wide Area Network</option>
+            <option value="E">E) Firmware for booting</option><option value="F">F) Short-term memory</option>
+            <option value="G">G) Network for one person</option><option value="H">H) Connects all components</option>
+            <option value="I">I) Visual web design software</option><option value="J">J) Long-term storage</option>
+          </select></div>
+
+        <div class="match-row"><div class="match-term"><span class="q-num">46</span> RAM</div>
+          <select id="m46"><option value="">— Select —</option>
+            <option value="A">A) Local Area Network</option><option value="B">B) The brain of the computer</option>
+            <option value="C">C) Language for creating web pages</option><option value="D">D) Wide Area Network</option>
+            <option value="E">E) Firmware for booting</option><option value="F">F) Short-term memory</option>
+            <option value="G">G) Network for one person</option><option value="H">H) Connects all components</option>
+            <option value="I">I) Visual web design software</option><option value="J">J) Long-term storage</option>
+          </select></div>
+
+        <div class="match-row"><div class="match-term"><span class="q-num">47</span> ROM</div>
+          <select id="m47"><option value="">— Select —</option>
+            <option value="A">A) Local Area Network</option><option value="B">B) The brain of the computer</option>
+            <option value="C">C) Language for creating web pages</option><option value="D">D) Wide Area Network</option>
+            <option value="E">E) Firmware for booting</option><option value="F">F) Short-term memory</option>
+            <option value="G">G) Network for one person</option><option value="H">H) Connects all components</option>
+            <option value="I">I) Visual web design software</option><option value="J">J) Long-term storage</option>
+          </select></div>
+
+        <div class="match-row"><div class="match-term"><span class="q-num">48</span> BIOS</div>
+          <select id="m48"><option value="">— Select —</option>
+            <option value="A">A) Local Area Network</option><option value="B">B) The brain of the computer</option>
+            <option value="C">C) Language for creating web pages</option><option value="D">D) Wide Area Network</option>
+            <option value="E">E) Firmware for booting</option><option value="F">F) Short-term memory</option>
+            <option value="G">G) Network for one person</option><option value="H">H) Connects all components</option>
+            <option value="I">I) Visual web design software</option><option value="J">J) Long-term storage</option>
+          </select></div>
+
+        <div class="match-row"><div class="match-term"><span class="q-num">49</span> Motherboard</div>
+          <select id="m49"><option value="">— Select —</option>
+            <option value="A">A) Local Area Network</option><option value="B">B) The brain of the computer</option>
+            <option value="C">C) Language for creating web pages</option><option value="D">D) Wide Area Network</option>
+            <option value="E">E) Firmware for booting</option><option value="F">F) Short-term memory</option>
+            <option value="G">G) Network for one person</option><option value="H">H) Connects all components</option>
+            <option value="I">I) Visual web design software</option><option value="J">J) Long-term storage</option>
+          </select></div>
+
+        <div class="match-row"><div class="match-term"><span class="q-num">50</span> WYSIWYG</div>
+          <select id="m50"><option value="">— Select —</option>
+            <option value="A">A) Local Area Network</option><option value="B">B) The brain of the computer</option>
+            <option value="C">C) Language for creating web pages</option><option value="D">D) Wide Area Network</option>
+            <option value="E">E) Firmware for booting</option><option value="F">F) Short-term memory</option>
+            <option value="G">G) Network for one person</option><option value="H">H) Connects all components</option>
+            <option value="I">I) Visual web design software</option><option value="J">J) Long-term storage</option>
+          </select></div>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION 5 ═══ -->
+    <div class="sec">
+      <span class="sec-num">5</span>
+      <h3 class="sec-title">Short Questions</h3>
+      <span class="sec-marks">10 Q · 30 Marks</span>
+    </div>
+
+    <div class="q"><div class="q-head"><span class="q-num">51</span><span class="q-text">Describe what HTML is and its main purpose.<span class="q-marks">(3 marks)</span></span></div><textarea id="s51" placeholder="Write your answer here…"></textarea></div>
+    <div class="q"><div class="q-head"><span class="q-num">52</span><span class="q-text">Give two examples of input devices and two examples of output devices.<span class="q-marks">(3 marks)</span></span></div><textarea id="s52" placeholder="Write your answer here…"></textarea></div>
+    <div class="q"><div class="q-head"><span class="q-num">53</span><span class="q-text">Explain the difference between RISC and CISC processors.<span class="q-marks">(3 marks)</span></span></div><textarea id="s53" placeholder="Write your answer here…"></textarea></div>
+    <div class="q"><div class="q-head"><span class="q-num">54</span><span class="q-text">What is the purpose of the BIOS in a computer system?<span class="q-marks">(3 marks)</span></span></div><textarea id="s54" placeholder="Write your answer here…"></textarea></div>
+    <div class="q"><div class="q-head"><span class="q-num">55</span><span class="q-text">Describe what a PAN is and give one example of a device used in a PAN.<span class="q-marks">(3 marks)</span></span></div><textarea id="s55" placeholder="Write your answer here…"></textarea></div>
+    <div class="q"><div class="q-head"><span class="q-num">56</span><span class="q-text">Explain why a Star network is commonly used in homes.<span class="q-marks">(3 marks)</span></span></div><textarea id="s56" placeholder="Write your answer here…"></textarea></div>
+    <div class="q"><div class="q-head"><span class="q-num">57</span><span class="q-text">What is WYSIWYG software? Give one advantage of using it.<span class="q-marks">(3 marks)</span></span></div><textarea id="s57" placeholder="Write your answer here…"></textarea></div>
+    <div class="q"><div class="q-head"><span class="q-num">58</span><span class="q-text">Explain the difference between RAM and ROM.<span class="q-marks">(3 marks)</span></span></div><textarea id="s58" placeholder="Write your answer here…"></textarea></div>
+    <div class="q"><div class="q-head"><span class="q-num">59</span><span class="q-text">What is a Mesh network layout and what is its main advantage?<span class="q-marks">(3 marks)</span></span></div><textarea id="s59" placeholder="Write your answer here…"></textarea></div>
+    <div class="q"><div class="q-head"><span class="q-num">60</span><span class="q-text">Describe two disadvantages of using embedded multimedia content on a website.<span class="q-marks">(3 marks)</span></span></div><textarea id="s60" placeholder="Write your answer here…"></textarea></div>
+
+    <!-- ═══ SECTION 6 ═══ -->
+    <div class="sec">
+      <span class="sec-num">6</span>
+      <h3 class="sec-title">Long Questions</h3>
+      <span class="sec-marks">2 Q · 20 Marks</span>
+    </div>
+
+    <div class="q"><div class="q-head"><span class="q-num">61</span><span class="q-text">You are building a new website for a local charity. Explain the process of creating a simple multiple-page website using WYSIWYG software, and describe how you would use multimedia content effectively.<span class="q-marks">(10 marks)</span></span></div><textarea id="l61" style="min-height:180px" placeholder="Write your answer here…"></textarea></div>
+    <div class="q"><div class="q-head"><span class="q-num">62</span><span class="q-text">Compare and contrast the different network layouts (Point-to-point, Bus, Ring, Star, Mesh). Describe a suitable scenario for each type of layout.<span class="q-marks">(10 marks)</span></span></div><textarea id="l62" style="min-height:180px" placeholder="Write your answer here…"></textarea></div>
+
+    <!-- SUBMIT -->
+    <div style="text-align:center;margin-top:56px">
+      <button class="btn btn-primary btn-lg" id="submitBtn" onclick="confirmSubmit()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Submit Exam · အဖြေစစ်ဆေးရန်
+      </button>
+      <p style="font-size:12.5px;color:var(--ink-4);margin-top:14px">You can submit only once.</p>
+    </div>
+
+    <!-- RESULT -->
+    <div class="result" id="resultBox">
+      <div class="result-badge" id="resultBadge">🏆</div>
+      <h2>Exam Completed</h2>
+      <div class="score" id="scoreDisplay">0<small> / 100</small></div>
+      <p class="msg" id="resultMessage"></p>
+      <div class="bd-grid" id="breakdown"></div>
+    </div>
+
+    <!-- ANSWER KEY -->
+    <div class="key" id="answerKey">
+      <h2>📝 Answer Key &amp; Explanations</h2>
+
+      <h3>Section 1 · Multiple Choice</h3>
+      <p>1. <strong>A</strong> — Hypertext Markup Language</p>
+      <p>2. <strong>C</strong> — <code>&lt;br&gt;</code></p>
+      <p>3. <strong>C</strong> — Adobe Dreamweaver</p>
+      <p>4. <strong>B</strong> — If the source site changes, the content may disappear</p>
+      <p>5. <strong>A</strong> — Central Processing Unit</p>
+      <p>6. <strong>D</strong> — Microphone</p>
+      <p>7. <strong>B</strong> — RISC</p>
+      <p>8. <strong>C</strong> — To boot the computer and check hardware</p>
+      <p>9. <strong>C</strong> — WAN</p>
+      <p>10. <strong>C</strong> — Mesh</p>
+      <p>11. <strong>B</strong> — <code>&lt;head&gt;</code></p>
+      <p>12. <strong>C</strong> — CPU</p>
+      <p>13. <strong>B</strong> — RAM</p>
+      <p>14. <strong>C</strong> — PAN</p>
+      <p>15. <strong>A</strong> — What You See Is What You Get</p>
+      <p>16. <strong>C</strong> — Monitor</p>
+      <p>17. <strong>B</strong> — Motherboard</p>
+      <p>18. <strong>A</strong> — Star</p>
+      <p>19. <strong>A</strong> — <code>&lt;a&gt;</code></p>
+      <p>20. <strong>B</strong> — RISC</p>
+
+      <h3>Section 2 · Fill in the Blanks</h3>
+      <p>21. <strong>Hypertext</strong></p>
+      <p>22. <strong>&lt;title&gt;</strong> (or title)</p>
+      <p>23. <strong>LAN</strong> (Local Area Network)</p>
+      <p>24. <strong>Motherboard</strong></p>
+      <p>25. <strong>RAM</strong> (Random Access Memory)</p>
+      <p>26. <strong>Get</strong></p>
+      <p>27. <strong>Mesh</strong></p>
+      <p>28. <strong>BIOS</strong> (Basic Input Output System)</p>
+      <p>29. <strong>Input</strong></p>
+      <p>30. <strong>CISC</strong></p>
+
+      <h3>Section 3 · True / False</h3>
+      <p>31. <strong>True</strong></p>
+      <p>32. <strong>False</strong> — WAN is larger than LAN</p>
+      <p>33. <strong>True</strong></p>
+      <p>34. <strong>False</strong> — ROM is non-volatile</p>
+      <p>35. <strong>True</strong></p>
+      <p>36. <strong>True</strong></p>
+      <p>37. <strong>False</strong> — CISC was used in early devices</p>
+      <p>38. <strong>True</strong></p>
+      <p>39. <strong>False</strong> — PAN is for personal / short-range use</p>
+      <p>40. <strong>True</strong></p>
+
+      <h3>Section 4 · Matching</h3>
+      <p>41. <strong>C</strong> · 42. <strong>A</strong> · 43. <strong>D</strong> · 44. <strong>G</strong> · 45. <strong>B</strong> · 46. <strong>F</strong> · 47. <strong>J</strong> · 48. <strong>E</strong> · 49. <strong>H</strong> · 50. <strong>I</strong></p>
+
+      <h3>Section 5 · Short Questions (3 marks each)</h3>
+      <p><strong>51.</strong> HTML is Hypertext Markup Language, used to create the structure and content of web pages. It uses tags to define elements like headings, paragraphs, and links.</p>
+      <p><strong>52.</strong> Input: Keyboard, Mouse. Output: Monitor, Printer.</p>
+      <p><strong>53.</strong> RISC (Reduced Instruction Set Computer) uses a small set of simple instructions, making it fast and energy-efficient. CISC (Complex Instruction Set Computer) uses a large set of complex instructions, often used in older PCs.</p>
+      <p><strong>54.</strong> The BIOS (Basic Input Output System) is firmware that initialises hardware components during the boot process and loads the operating system.</p>
+      <p><strong>55.</strong> A PAN (Personal Area Network) is a network centred around one person, typically within a range of 10 metres. Example: Bluetooth headphones connected to a smartphone.</p>
+      <p><strong>56.</strong> Star networks are easy to set up, and if one device fails it doesn't affect the others. The central hub (router) manages traffic efficiently. It is the most common layout in homes.</p>
+      <p><strong>57.</strong> WYSIWYG (What You See Is What You Get) software allows users to design web pages visually without writing code. Advantage: it is faster and easier for beginners.</p>
+      <p><strong>58.</strong> RAM is volatile memory that temporarily stores data currently in use. ROM is non-volatile memory that permanently stores essential startup instructions.</p>
+      <p><strong>59.</strong> A Mesh network connects every device to every other device. Its main advantage is high redundancy — if one connection fails, data can be routed through another path.</p>
+      <p><strong>60.</strong> Disadvantage 1: if the source website removes the content, it disappears from your site. Disadvantage 2: it can slow down your website's loading time if the embedded content is heavy.</p>
+
+      <h3>Section 6 · Long Questions (10 marks each)</h3>
+      <p><strong>61. (Sample Answer)</strong> To create a multiple-page website for a charity, I would first plan the site structure and folder hierarchy. Using WYSIWYG software like Adobe Dreamweaver or Mobirise, I can drag and drop elements to create a template page. I would design a consistent banner, navigation menu, and footer, then duplicate this template to create additional pages. For multimedia, I would embed a YouTube video of the charity's work using an <code>&lt;iframe&gt;</code> tag, ensuring it is relevant to the target audience. I would add audio clips of interviews, but ensure I have permission to use them. I would compress images to keep the site fast and test the site on different devices to ensure responsiveness.</p>
+      <p><strong>62. (Sample Answer)</strong><br>
+      <strong>Point-to-point:</strong> Direct connection between two devices. Scenario: connecting a laptop to a printer via USB.<br>
+      <strong>Bus:</strong> All devices connect to a single backbone cable. Scenario: older, small office networks. Cheaper, but if the main cable breaks the whole network goes down.<br>
+      <strong>Ring:</strong> Devices connected in a closed loop; data travels in one direction. Scenario: some older office buildings. Can be slow as data passes through each device.<br>
+      <strong>Star:</strong> All devices connect to a central hub/switch. Scenario: modern homes and offices. Easy to troubleshoot, but if the hub fails the network fails.<br>
+      <strong>Mesh:</strong> Every device connects to every other device. Scenario: military or large corporate networks where reliability is critical. Very robust but expensive and complex to set up.</p>
+    </div>
+
+  </div><!-- /examBody -->
+</section>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ═══════════════════════════════════════════
+   ERROR GUARD + ANTI-COPY
+   ═══════════════════════════════════════════ */
+window.onerror = (m,s,l) => { console.error('JS Error:', m, 'line', l); return true; };
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey && ['c','u','s','p'].includes(e.key.toLowerCase())) {
+    e.preventDefault();
+    toast('Copying and viewing source is disabled.');
+  }
+});
+
+/* ── TOAST ── */
+let toastTimer;
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
+}
+
+/* ═══════════════════════════════════════════
+   TABS
+   ═══════════════════════════════════════════ */
+function switchTab(name){
+  document.querySelectorAll('.tab').forEach(b =>
+    b.classList.toggle('active', b.dataset.tab === name));
+  document.querySelectorAll('.view').forEach(v =>
+    v.classList.toggle('active', v.id === 'view-' + name));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+document.querySelectorAll('.tab').forEach(btn =>
+  btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
+
+/* ═══════════════════════════════════════════
+   FULLSCREEN
+   ═══════════════════════════════════════════ */
+function toggleFullScreen(){
+  try{
+    if(!document.fullscreenElement){
+      document.documentElement.requestFullscreen()
+        .catch(() => toast('Fullscreen blocked by browser.'));
+    } else if(document.exitFullscreen){
+      document.exitFullscreen();
+    }
+  }catch(e){ console.log('Fullscreen error:', e.message); }
+}
+
+/* ═══════════════════════════════════════════
+   AUDIO ALARM
+   ═══════════════════════════════════════════ */
+function playAlarm(){
+  try{
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(440, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.5);
+    gain.gain.setValueAtTime(0.35, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 1);
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.start(); osc.stop(ctx.currentTime + 1);
+  }catch(e){ console.log('Audio not allowed.'); }
+}
+
+/* ═══════════════════════════════════════════
+   TIMER
+   ═══════════════════════════════════════════ */
+let timeLeft = 3600;
+let timerInterval = null;
+const timerEl  = document.getElementById('timer');
+const timerTxt = document.getElementById('timerText');
+
+function startTimer(){
+  timerEl.classList.add('on');
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    const m = Math.floor(timeLeft / 60);
+    const s = timeLeft % 60;
+    timerTxt.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    timerEl.classList.toggle('warn', timeLeft <= 300);
+    if(timeLeft <= 0){
+      clearInterval(timerInterval);
+      toast('⏰ Time is up! Submitting automatically…');
+      checkAnswers();
+    }
+  }, 1000);
+}
+
+/* ═══════════════════════════════════════════
+   START EXAM
+   ═══════════════════════════════════════════ */
+function startExam(){
+  document.getElementById('startCard').style.display = 'none';
+  document.getElementById('examBody').style.display = 'block';
+  startTimer();
+  attachProgressTracking();
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  toast('Exam started. Good luck! 🍀');
+}
+
+/* ═══════════════════════════════════════════
+   PROGRESS
+   ═══════════════════════════════════════════ */
+function attachProgressTracking(){
+  document.querySelectorAll('#examBody input[type=radio], #examBody select, #examBody input[type=text]')
+    .forEach(el => el.addEventListener('change', updateProgress));
+  document.querySelectorAll('#examBody textarea')
+    .forEach(el => el.addEventListener('input', updateProgress));
+}
+
+function updateProgress(){
+  const total = 50;
+  let done = 0;
+
+  for(let i = 1; i <= 20; i++)
+    if(document.querySelector(`input[name="q${i}"]:checked`)) done++;
+  for(let i = 21; i <= 30; i++){
+    const el = document.getElementById('f' + i);
+    if(el && el.value.trim()) done++;
+  }
+  for(let i = 31; i <= 40; i++){
+    const el = document.getElementById('tf' + i);
+    if(el && el.value) done++;
+  }
+  for(let i = 41; i <= 50; i++){
+    const el = document.getElementById('m' + i);
+    if(el && el.value) done++;
+  }
+
+  document.querySelectorAll('#examBody .q').forEach(q => {
+    const radio = q.querySelector('input[type=radio]:checked');
+    const sel   = q.querySelector('select');
+    const inp   = q.querySelector('input[type=text]');
+    const txt   = q.querySelector('textarea');
+    let answered = false;
+
+    if(radio) answered = true;
+    else if(sel && sel.value) answered = true;
+    else if(inp && inp.value.trim()) answered = true;
+    else if(txt && txt.value.trim()) answered = true;
+
+    q.classList.toggle('answered', answered);
+  });
+
+  const pct = Math.round(done / total * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = done;
+  document.getElementById('progressPct').textContent = pct + '%';
+}
+
+/* ═══════════════════════════════════════════
+   SUBMIT
+   ═══════════════════════════════════════════ */
+function confirmSubmit(){
+  if(confirm('Are you sure you want to submit the exam?\nအဖြေလွှာကို သေချာစစ်ဆေးပြီးပါပြီလား?')){
+    checkAnswers();
+  }
+}
+
+/* ═══════════════════════════════════════════
+   GRADE
+   ═══════════════════════════════════════════ */
+function checkAnswers(){
+  if(timerInterval) clearInterval(timerInterval);
+  timerEl.classList.remove('on','warn');
+
+  let score = 0;
+  const bd = { mcq:0, fill:0, tf:0, match:0, short:0, long:0 };
+
+  /* 1 — MCQ */
+  const mcq = {q1:'A',q2:'C',q3:'C',q4:'B',q5:'A',q6:'D',q7:'B',q8:'C',q9:'C',q10:'C',
+               q11:'B',q12:'C',q13:'B',q14:'C',q15:'A',q16:'C',q17:'B',q18:'A',q19:'A',q20:'B'};
+  for(let i = 1; i <= 20; i++){
+    const card = document.querySelector(`input[name="q${i}"]`).closest('.q');
+    const sel  = document.querySelector(`input[name="q${i}"]:checked`);
+    if(sel && sel.value === mcq['q'+i]){ score++; bd.mcq++; card.classList.add('correct'); }
+    else if(sel){ card.classList.add('wrong'); }
+  }
+
+  /* 2 — Fill */
+  const fill = {
+    f21:['hypertext','hypertext markup language'],
+    f22:['title','<title>','&lt;title&gt;'],
+    f23:['lan','local area network'],
+    f24:['motherboard'],
+    f25:['ram','random access memory'],
+    f26:['get'],
+    f27:['mesh'],
+    f28:['bios','basic input output system'],
+    f29:['input'],
+    f30:['cisc']
+  };
+  for(let i = 21; i <= 30; i++){
+    const el = document.getElementById('f' + i);
+    const card = el.closest('.q');
+    const v = el.value.trim().toLowerCase();
+    if(fill['f'+i].includes(v)){ score++; bd.fill++; card.classList.add('correct'); }
+    else if(v){ card.classList.add('wrong'); }
+  }
+
+  /* 3 — TF */
+  const tf = {tf31:'True',tf32:'False',tf33:'True',tf34:'False',tf35:'True',
+              tf36:'True',tf37:'False',tf38:'True',tf39:'False',tf40:'True'};
+  for(let i = 31; i <= 40; i++){
+    const el = document.getElementById('tf' + i);
+    const card = el.closest('.q');
+    if(el.value === tf['tf'+i]){ score++; bd.tf++; card.classList.add('correct'); }
+    else if(el.value){ card.classList.add('wrong'); }
+  }
+
+  /* 4 — Match */
+  const mt = {m41:'C',m42:'A',m43:'D',m44:'G',m45:'B',m46:'F',m47:'J',m48:'E',m49:'H',m50:'I'};
+  for(let i = 41; i <= 50; i++){
+    const el = document.getElementById('m' + i);
+    const row = el.closest('.match-row');
+    if(el.value === mt['m'+i]){ score++; bd.match++; row.style.background = 'rgba(30,158,98,.07)'; }
+    else if(el.value){ row.style.background = 'rgba(214,69,69,.07)'; }
+  }
+
+  /* 5 — Short */
+  const sk = {
+    s51:['html','hypertext','markup','web','page','tag'],
+    s52:['input','output','keyboard','mouse','monitor','printer','speaker','microphone'],
+    s53:['risc','cisc','reduced','complex','instruction','simple','fast','energy'],
+    s54:['bios','boot','hardware','startup','firmware','check'],
+    s55:['pan','personal','area','network','bluetooth','headphone','smartphone'],
+    s56:['star','easy','hub','router','fail','central','home'],
+    s57:['wysiwyg','what you see is what you get','visual','code','advantage','fast','easy'],
+    s58:['ram','rom','volatile','non-volatile','temporary','permanent','memory'],
+    s59:['mesh','every','device','connect','redundancy','robust','reliable','expensive'],
+    s60:['source','disappear','slow','loading','permission','copyright','embed','multimedia']
+  };
+  for(let i = 51; i <= 60; i++){
+    const txt = document.getElementById('s' + i).value.toLowerCase();
+    let hits = 0;
+    if(txt.length > 10){
+      sk['s'+i].forEach(k => { if(txt.includes(k)) hits++; });
+      if(hits >= 2){ score += 3; bd.short += 3; }
+      else if(hits === 1){ score += 1; bd.short += 1; }
+    }
+  }
+
+  /* 6 — Long */
+  const lk = {
+    l61:['wysiwyg','plan','template','multimedia','embed','video','audio','permission','test','responsive','folder'],
+    l62:['point-to-point','bus','ring','star','mesh','topology','layout','scenario','hub','cable']
+  };
+  for(let i = 61; i <= 62; i++){
+    const txt = document.getElementById('l' + i).value.toLowerCase();
+    let hits = 0;
+    if(txt.length > 50){
+      lk['l'+i].forEach(k => { if(txt.includes(k)) hits++; });
+      if(hits >= 5){ score += 10; bd.long += 10; }
+      else if(hits >= 3){ score += 7; bd.long += 7; }
+      else if(hits >= 1){ score += 4; bd.long += 4; }
+    }
+  }
+
+  /* ── DISPLAY ── */
+  document.getElementById('scoreDisplay').innerHTML = score + '<small> / 100</small>';
+
+  const badge = document.getElementById('resultBadge');
+  let msg = '';
+  if(score >= 80){ badge.textContent = '🏆'; msg = 'Excellent! You have a strong understanding of the topics.'; }
+  else if(score >= 50){ badge.textContent = '👍'; msg = 'Good effort! Review the topics you missed to improve.'; playAlarm(); }
+  else { badge.textContent = '⚠️'; msg = 'Needs improvement. Please study the notes and try again.'; playAlarm(); }
+
+  document.getElementById('resultMessage').textContent = msg;
+
+  document.getElementById('breakdown').innerHTML = `
+    <div class="bd"><div class="k">Multiple Choice</div><div class="v">${bd.mcq}<small> / 20</small></div></div>
+    <div class="bd"><div class="k">Fill Blanks</div><div class="v">${bd.fill}<small> / 10</small></div></div>
+    <div class="bd"><div class="k">True / False</div><div class="v">${bd.tf}<small> / 10</small></div></div>
+    <div class="bd"><div class="k">Matching</div><div class="v">${bd.match}<small> / 10</small></div></div>
+    <div class="bd"><div class="k">Short Answers</div><div class="v">${bd.short}<small> / 30</small></div></div>
+    <div class="bd"><div class="k">Long Answers</div><div class="v">${bd.long}<small> / 20</small></div></div>
+  `;
+
+  const resultBox = document.getElementById('resultBox');
+  resultBox.style.display = 'block';
+  document.getElementById('answerKey').style.display = 'block';
+
+  document.querySelectorAll('#examBody input, #examBody select, #examBody textarea')
+    .forEach(el => el.disabled = true);
+
+  const sb = document.getElementById('submitBtn');
+  sb.disabled = true;
+  sb.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Submitted';
+
+  setTimeout(() => resultBox.scrollIntoView({ behavior:'smooth', block:'center' }), 120);
+}
+</script>
+
+</body>
+</html>
